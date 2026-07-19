@@ -55,7 +55,8 @@ function Intro({ onDone }: { onDone: () => void }) {
 
     // Per-step display durations (ms). Adjust to lengthen specific steps:
     // durations[i] is the time to display greetings[i] before moving to the next.
-    const durations = [700, 1800, 1600];
+    // Shorter durations to increase the perceived speed of the intro
+    const durations = [500, 900, 800];
 
     const timeouts: number[] = [];
     let elapsed = 0;
@@ -372,7 +373,7 @@ function About() {
         <div className="about__portrait" aria-hidden="true">
           <div className="about__portrait-inner">
             <img
-              src="/assets/portrait-bw.png"
+              src="/assets/portrait-fill.png"
               alt="Retrato"
               className="about__portrait-img"
             />
