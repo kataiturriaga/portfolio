@@ -896,7 +896,7 @@ button {
   border-radius: 50% 50% 5% 5%;
   background: var(--ink);
   content: "";
-  opacity: 0.92;
+  opacity: 0; /* hide decorative overlay so portrait photo is visible */
   transform: translateY(25%);
 }
 
@@ -904,6 +904,15 @@ button {
   position: relative;
   z-index: 1;
   color: white;
+}
+
+.about__portrait-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
 }
 
 .about__portrait-inner strong {

@@ -52,13 +52,25 @@ function Intro({ onDone }: { onDone: () => void }) {
       onDone();
       return;
     }
-    const cycle = window.setInterval(
-      () => setStep((current) => Math.min(current + 1, greetings.length - 1)),
-      580,
-    );
-    const finish = window.setTimeout(onDone, 2300);
+
+    // Per-step display durations (ms). Adjust to lengthen specific steps:
+    // durations[i] is the time to display greetings[i] before moving to the next.
+    const durations = [700, 1800, 1600];
+
+    const timeouts: number[] = [];
+    let elapsed = 0;
+    // Schedule advancing to each subsequent step at the cumulative elapsed time.
+    for (let i = 1; i < greetings.length; i++) {
+      elapsed += durations[i - 1];
+      const id = window.setTimeout(() => setStep(i), elapsed);
+      timeouts.push(id as unknown as number);
+    }
+
+    // Finish after the last step's display duration.
+    const finish = window.setTimeout(onDone, elapsed + durations[greetings.length - 1]);
+
     return () => {
-      window.clearInterval(cycle);
+      timeouts.forEach((id) => window.clearTimeout(id));
       window.clearTimeout(finish);
     };
   }, [onDone, reduce, greetings.length]);
@@ -359,7 +371,11 @@ function About() {
       <div className="paper-shell about">
         <div className="about__portrait" aria-hidden="true">
           <div className="about__portrait-inner">
-            <span>{content.copy.about.portrait}</span>
+            <img
+              src="/assets/portrait-bw.png"
+              alt="Retrato"
+              className="about__portrait-img"
+            />
             <strong>✶</strong>
           </div>
           <p>{content.copy.about.portraitCaption}</p>
