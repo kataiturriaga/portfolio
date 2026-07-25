@@ -3168,6 +3168,8 @@ button {
   min-width: 0;
   padding-left: var(--gutter);
   padding-right: 1rem;
+  /* baja el menú hasta el eyebrow del contenido (el hero tiene este padding-top) */
+  margin-top: clamp(3rem, 6vw, 5rem);
 }
 
 .case-sidenav__back {
