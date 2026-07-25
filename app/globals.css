@@ -2457,55 +2457,69 @@ button {
 }
 
 .case-hero {
+  display: flex;
+  flex-direction: column;
   padding-top: clamp(3rem, 6vw, 5rem);
   padding-bottom: clamp(3rem, 7vw, 6rem);
   border-bottom: 1px solid var(--ink);
 }
 
-.case-hero__back {
-  display: inline-block;
-  margin-bottom: clamp(2.5rem, 6vw, 4rem);
-  color: var(--ink);
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  transition: color 160ms ease;
-}
-
-.case-hero__back:hover {
-  color: var(--red);
-}
-
-.case-hero__thesis {
+.case-hero__title {
   max-width: 1100px;
   margin: 0 0 1.5rem;
   font-family: var(--serif);
-  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  font-style: italic;
+  font-size: clamp(3.2rem, 8vw, 6rem);
   font-weight: 500;
-  letter-spacing: -0.03em;
-  line-height: 1.02;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+  color: var(--ink);
 }
 
-.case-hero__subthesis {
-  max-width: 640px;
+.case-hero__subtitle {
+  max-width: 52ch;
+  margin: 0 0 2.5rem;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+  line-height: 1.4;
+}
+
+.case-hero__deck {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 60ch;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--rule);
+}
+
+.case-hero__deck p {
   margin: 0;
   color: var(--ink-soft);
   font-family: var(--serif);
-  font-size: 1.25rem;
-  line-height: 1.55;
+  font-size: 1.05rem;
+  line-height: 1.6;
 }
 
 .case-hero__media {
-  overflow: hidden;
   margin-top: clamp(2.5rem, 6vw, 4rem);
-  border: 1px solid var(--ink);
 }
 
 .case-hero__media img {
   display: block;
   width: 100%;
   height: auto;
+  border: 1px solid var(--rule);
+}
+
+.case-hero__media figcaption {
+  margin-top: 0.75rem;
+  color: var(--ink-soft);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .case-glance {
@@ -3061,10 +3075,6 @@ button {
 }
 
 @media (max-width: 720px) {
-  .case-hero__thesis {
-    font-size: clamp(2.4rem, 11vw, 3rem);
-  }
-
   .case-decision__head {
     flex-direction: column;
     gap: 0.3rem;
