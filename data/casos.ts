@@ -227,7 +227,7 @@ export const casos: CaseStudy[] = [
       title: "Asesorías V2 — el dashboard del coach",
     },
     heroMedia: {
-      src: "/casos/asesorias-v2-app/hero-v2-app-2.jpg",
+      src: "/casos/asesorias-v2-app/hero-v2-app-2@2x.png",
       alt: "Textura azul abstracta — hero del caso Asesorías V2",
     },
   },
