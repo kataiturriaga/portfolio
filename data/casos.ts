@@ -187,14 +187,3 @@ export function getCaso(slug: string): CaseStudy | undefined {
   return casos.find((caso) => caso.slug === slug);
 }
 
-export function getCasoNeighbors(slug: string): {
-  previous?: CaseStudy;
-  next?: CaseStudy;
-} {
-  const index = casos.findIndex((caso) => caso.slug === slug);
-  if (index === -1) return {};
-  return {
-    previous: index > 0 ? casos[index - 1] : undefined,
-    next: index < casos.length - 1 ? casos[index + 1] : undefined,
-  };
-}

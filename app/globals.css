@@ -2568,9 +2568,6 @@ button {
   margin-bottom: 0;
 }
 
-.case-decisions {
-  border-bottom: 1px solid var(--rule);
-}
 
 .case-decision {
   padding-block: clamp(3rem, 7vw, 5.5rem);
