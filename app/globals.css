@@ -3013,6 +3013,11 @@ button {
   font-size: 0.8rem;
 }
 
+.case-brief__text {
+  flex: 1;
+  min-width: 0;
+}
+
 .case-brief__text h3 {
   margin: 0 0 0.4rem;
   font-family: var(--serif);
