@@ -14,11 +14,10 @@ export default function CaseSideNav({ items }: { items: NavItem[] }) {
   const [active, setActive] = useState<string>(items[0]?.id ?? "");
 
   useEffect(() => {
-    const ids = items.flatMap((i) => [
-      i.id,
-      ...(i.children?.map((c) => c.id) ?? []),
-    ]);
-    const els = ids
+    const observedIds = items.flatMap((i) =>
+      i.children?.length ? i.children.map((c) => c.id) : [i.id],
+    );
+    const els = observedIds
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null);
     if (els.length === 0) return;
@@ -45,6 +44,9 @@ export default function CaseSideNav({ items }: { items: NavItem[] }) {
 
   const isActive = (id: string) => active === id;
 
+  const branchActive = (item: NavItem) =>
+    active === item.id || !!item.children?.some((c) => c.id === active);
+
   return (
     <nav className="case-sidenav" aria-label="Índice del caso">
       <Link href="/casos" className="case-sidenav__back">
@@ -56,8 +58,8 @@ export default function CaseSideNav({ items }: { items: NavItem[] }) {
             <a
               href={`#${item.id}`}
               onClick={go(item.id)}
-              className={`case-sidenav__link ${isActive(item.id) ? "is-active" : ""}`}
-              aria-current={isActive(item.id) ? "true" : undefined}
+              className={`case-sidenav__link ${branchActive(item) ? "is-active" : ""}`}
+              aria-current={branchActive(item) ? "true" : undefined}
             >
               <span className="case-sidenav__marker" aria-hidden="true" />
               {item.label}

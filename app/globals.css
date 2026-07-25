@@ -1513,6 +1513,10 @@ button {
     padding-inline: 1.2rem;
   }
 
+  .case-shell {
+    padding-inline: 1.2rem;
+  }
+
   .utility-bar__brand {
     max-width: 170px;
   }
