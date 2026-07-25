@@ -2886,26 +2886,31 @@ button {
 
 /* Dual-view: toggle, impact, brief */
 .case-toggle {
-  display: flex;
+  display: inline-flex;
+  gap: 0;
   margin-bottom: clamp(2rem, 5vw, 3rem);
-  border: 1px solid var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 4px;
+  background: var(--surface);
 }
 
 .case-toggle__option {
-  display: flex;
-  flex: 1 1 50%;
-  flex-direction: column;
-  gap: 0.3rem;
-  padding: 1.1rem 1.4rem;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
+  border-radius: 999px;
+  padding: 0.6rem 1.2rem;
   cursor: pointer;
   background: transparent;
+  border: 1px solid transparent;
   color: var(--ink);
   text-align: left;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   transition: background 220ms ease, color 220ms ease;
-}
-
-.case-toggle__option + .case-toggle__option {
-  border-left: 1px solid var(--ink);
 }
 
 .case-toggle__option:hover {
@@ -2913,34 +2918,37 @@ button {
 }
 
 .case-toggle__option.is-active {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--red);
 }
 
 .case-toggle__option.is-active:hover {
-  background: var(--ink);
+  background: var(--red);
 }
 
 .case-toggle__label {
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--ink);
 }
 
-.case-toggle__hint {
+.case-toggle__hint,
+.case-toggle__sep {
   color: var(--ink-soft);
-  font-size: 0.78rem;
+  font-weight: 400;
+  font-size: 0.78em;
 }
 
-.case-toggle__option.is-active .case-toggle__hint {
+.case-toggle__option.is-active .case-toggle__label {
+  color: var(--paper);
+}
+
+.case-toggle__option.is-active .case-toggle__hint,
+.case-toggle__option.is-active .case-toggle__sep {
   color: rgba(246, 243, 240, 0.72);
 }
 
 .case-toggle__option:focus-visible {
   outline: 2px solid var(--red);
-  outline-offset: -3px;
+  outline-offset: 2px;
 }
 
 .case-impact {
@@ -3092,12 +3100,25 @@ button {
   }
 
   .case-toggle {
-    flex-direction: column;
+    display: flex;
+    width: 100%;
   }
 
-  .case-toggle__option + .case-toggle__option {
-    border-left: 0;
-    border-top: 1px solid var(--ink);
+  .case-toggle__option {
+    flex: 1;
+    justify-content: center;
+    text-align: center;
+    white-space: normal;
+    flex-wrap: wrap;
+  }
+
+  .case-toggle__sep {
+    display: none;
+  }
+
+  .case-toggle__hint {
+    flex-basis: 100%;
+    text-align: center;
   }
 
   .case-impact__grid {

@@ -3,8 +3,8 @@
 export type CaseView = "corta" | "extensa";
 
 const OPTIONS: { value: CaseView; label: string; hint: string }[] = [
-  { value: "corta", label: "Para reclutadores", hint: "Rápido y al grano" },
-  { value: "extensa", label: "Para design leads", hint: "El caso a fondo" },
+  { value: "corta", label: "Vista reclutador", hint: "Resumen 30 seg" },
+  { value: "extensa", label: "Vista design lead", hint: "Caso completo" },
 ];
 
 export default function CaseViewToggle({
@@ -27,6 +27,7 @@ export default function CaseViewToggle({
             onClick={() => onChange(opt.value)}
           >
             <span className="case-toggle__label">{opt.label}</span>
+            <span className="case-toggle__sep" aria-hidden="true"> · </span>
             <span className="case-toggle__hint">{opt.hint}</span>
           </button>
         );
