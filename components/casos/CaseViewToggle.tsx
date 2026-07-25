@@ -15,15 +15,14 @@ export default function CaseViewToggle({
   onChange: (v: CaseView) => void;
 }) {
   return (
-    <div className="paper-shell case-toggle" role="tablist" aria-label="Modo de lectura">
+    <div className="paper-shell case-toggle" role="group" aria-label="Modo de lectura">
       {OPTIONS.map((opt) => {
         const selected = view === opt.value;
         return (
           <button
             key={opt.value}
             type="button"
-            role="tab"
-            aria-selected={selected}
+            aria-pressed={selected}
             className={`case-toggle__option ${selected ? "is-active" : ""}`}
             onClick={() => onChange(opt.value)}
           >
