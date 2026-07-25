@@ -33,7 +33,7 @@ export default function CaseStudyView({ caso }: { caso: CaseStudy }) {
             label: "Decisiones clave",
             children: caso.decisions.map((d) => ({
               id: `decision-${d.number}`,
-              label: d.title,
+              label: d.shortLabel,
             })),
           },
           { id: "resto", label: "El resto del trabajo" },
