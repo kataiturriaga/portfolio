@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const navItems = [
-  { label: "Trabajo", homeHref: "#trabajo", innerHref: "/#trabajo" },
+  { label: "Trabajo", homeHref: "/casos", innerHref: "/casos" },
   { label: "Procesos", homeHref: "/procesos", innerHref: "/procesos" },
   { label: "Trayectoria", homeHref: "#trayectoria", innerHref: "/#trayectoria" },
   { label: "Contacto", homeHref: "#contacto", innerHref: "/#contacto" },
@@ -51,7 +51,8 @@ export default function SiteHeader() {
           {navItems.map((item) => {
             const href = isHome ? item.homeHref : item.innerHref;
             const isCurrent =
-              item.label === "Procesos" && pathname.startsWith("/procesos");
+              (item.label === "Procesos" && pathname.startsWith("/procesos")) ||
+              (item.label === "Trabajo" && pathname.startsWith("/casos"));
             return (
               <Link
                 key={item.label}
