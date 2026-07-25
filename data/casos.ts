@@ -40,6 +40,8 @@ export type CaseStudy = {
   slug: string;
   title: string;
   kicker: string; // eyebrow del hero
+  heroTitle: string; // título grande en cursiva (1-2 palabras)
+  heroSubtitle: string; // subtítulo de una línea
   thesis: string;
   subthesis: string;
   glance: CaseGlanceData;
@@ -58,6 +60,8 @@ export const casos: CaseStudy[] = [
     slug: "asesorias-v2-app",
     title: "Asesorías V2 — la app del cliente",
     kicker: "Caso de estudio · App coached · 2026",
+    heroTitle: "Añadiendo capas",
+    heroSubtitle: "La v1 era plana; la v2 le dio profundidad a cada flujo.",
     thesis:
       "La v1 era plana. Un estilo de entreno, una lista de dieta, un contador de pasos que nadie miraba.",
     subthesis:
@@ -217,8 +221,10 @@ export const casos: CaseStudy[] = [
       slug: "asesorias-v2-dash",
       title: "Asesorías V2 — el dashboard del coach",
     },
-    // heroMedia: { src: "/casos/asesorias-v2-app/hero.png", alt: "App El Método — pantallas de la v2" },
-    // TODO: restaurar al añadir la imagen (Tarea 4)
+    heroMedia: {
+      src: "/casos/asesorias-v2-app/hero-v2-app.jpg",
+      alt: "Textura azul abstracta — hero del caso Asesorías V2",
+    },
   },
 ];
 
