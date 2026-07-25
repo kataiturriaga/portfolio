@@ -55,29 +55,29 @@ export const casos: CaseStudy[] = [
       "La v2 le dio profundidad a cada flujo: más experiencias de entreno, una dieta con capas, los pasos convertidos en juego y una puerta de entrada sin fricción.",
     glance: {
       role: "Product Designer + PM",
-      period: "Abril–Junio 2026",
+      period: "Abril a julio de 2026",
       team: "2 personas (diseño/PM + desarrollo)",
       product: "El Método — tier coached (asesorías personalizadas)",
       problem:
         "El tier coached costaba más que la suscripción pero heredó una app peor, plana y superficial.",
       solution:
-        "Rediseño v1→v2 que añade capas de información y experiencias a cada flujo clave del cliente.",
+        "Rediseño de la v1 a la v2 que añade capas de información y experiencias a cada flujo clave del cliente.",
     },
     problem: {
       eyebrow: "El problema",
       title: "Pagaban más, recibían menos",
       paragraphs: [
-        "La app de asesorías existía como producto separado, con una experiencia muy por debajo del nivel de calidad de la app de suscripción (Automática) — nuestro benchmark interno de calidad, no una versión gratuita. Los usuarios del tier coached pagaban más pero recibían una experiencia peor: la diferencia no estaba justificada por el producto.",
-        "Cada flujo clave era plano y tenía como máximo tres capas de profundidad. Entreno ofrecía un solo tipo de experiencia: fuerza. Dieta era una lista sin variedad, sin recetas ni equivalencias. Pasos era un contador pasivo que registraba el día y no llevaba a ninguna parte — un dato que nadie miraba.",
-        "El objetivo de la v2 fue cerrar esa brecha dando profundidad a cada uno de esos flujos, sin perder de vista que el equipo era pequeño y el deadline de handoff era el 30 de mayo de 2026.",
+        "La app de asesorías existía como producto separado, con una experiencia muy por debajo del nivel de calidad de la app de suscripción (Automática), que era nuestro benchmark interno, no una versión gratuita. Los usuarios del tier coached pagaban más pero recibían una experiencia peor: la diferencia no estaba justificada por el producto.",
+        "Cada flujo clave era plano y tenía como máximo tres capas de profundidad. Entreno ofrecía un solo tipo de experiencia: fuerza. Dieta era una lista sin variedad, sin recetas ni equivalencias. Pasos era un contador pasivo que registraba el día y no empujaba al usuario a superarse.",
+        "El objetivo de la v2 fue cerrar esa brecha dando profundidad a cada uno de esos flujos, sin perder de vista que el equipo era pequeño y que el handoff tenía que estar listo en julio.",
       ],
     },
     howWeWorked: {
       eyebrow: "Cómo trabajamos",
       title: "Un equipo de dos, decisiones sobre datos de uso",
       paragraphs: [
-        "Éramos dos personas: diseño/PM y desarrollo. Sin ese tamaño de equipo, cada decisión tenía que justificarse con algo más sólido que intuición — usamos la app de suscripción (Automática) como benchmark de calidad y los datos reales de uso como criterio de diseño.",
-        "Por ejemplo: el 58% de los usuarios abre la app justo antes de cada comida, así que cada pantalla extra en ese momento es fricción real — eso determinó que la pantalla principal de dieta tuviera que resolver la consulta en un solo tap, sin pantallas intermedias.",
+        "Éramos dos personas: diseño/PM y desarrollo. Sin ese tamaño de equipo, cada decisión tenía que justificarse con algo más sólido que la intuición. Usamos la app de suscripción (Automática) como benchmark de calidad y los datos reales de uso como criterio de diseño. Hicimos entrevistas con clientes de la coached y encuestas para entender mejor sus dolores actuales.",
+        "Por ejemplo: el 58% de los usuarios abre la app justo antes de cada comida, así que cada pantalla extra en ese momento es fricción real. Eso determinó que la pantalla principal de dieta tuviera que resolver la consulta en un solo tap, sin pantallas intermedias.",
       ],
     },
     decisions: [
@@ -85,15 +85,15 @@ export const casos: CaseStudy[] = [
         number: "01",
         title: "El contador de pasos se convierte en juego",
         area: "Retención / gamificación / filosofía de marca",
-        from: "En la v1 la app tenía un contador de pasos: un número pasivo que registraba el día y no llevaba a ninguna parte. El objetivo de pasos diarios es una de las patas de la filosofía del método — combinar entrenamiento de fuerza (u otras modalidades) con movimiento moderado, andar — pero el producto no lo trataba como algo que importara. Un dato que nadie miraba.",
+        from: "En la v1 la app tenía un contador de pasos: un número pasivo que registraba el día y no llevaba a ninguna parte. El objetivo de pasos diarios es una de las patas de la filosofía del método, combinar el entrenamiento de fuerza (u otras modalidades) con movimiento moderado, andar. Pero el producto no lo trataba como algo que importara.",
         decided: [
-          "En la v2 el contador se mantiene, pero encima se construye un ranking basado en los pasos: los clientes compiten entre ellos por cumplir el objetivo diario. El número deja de ser un registro privado y pasa a ser una posición social.",
-          "El motivo es alinear el producto con la filosofía de marca: si andar es media ecuación del método, tiene que sentirse tan protagonista como levantar peso. Un ranking convierte un hábito silencioso en algo con fricción emocional — quieres subir, quieres no bajar.",
-          "El % de días con objetivo de pasos cumplido alimenta además el score del ciclo, así que el mismo dato tiene una lectura social (ranking) y una lectura personal (progreso en tus revisiones).",
+          "En la v2 elevamos el contador con un diseño más cuidado e interactivo, y encima construimos un ranking basado en los pasos: los clientes compiten entre ellos por cumplir el objetivo diario. El número deja de ser un registro privado y pasa a ser una posición social.",
+          "El motivo es alinear el producto con la filosofía de marca: si andar es media ecuación del método, tiene que sentirse tan protagonista como levantar peso. Un ranking convierte un hábito silencioso en algo con fricción emocional: quieres subir, quieres no bajar.",
+          "El porcentaje de días con objetivo de pasos cumplido alimenta además el score del ciclo, así que el mismo dato tiene una lectura social (el ranking) y una lectura personal (tu progreso en las revisiones).",
         ],
         alternatives: [
-          "Dejar solo el contador con un objetivo personal (statu quo mejorado): más simple, pero no explota la palanca social ni refuerza la filosofía.",
-          "Insignias/medallas individuales sin comparación entre usuarios: gamificación sin el gancho competitivo; menos motivador para una comunidad que ya se conoce.",
+          "Dejar solo el contador con un objetivo personal (un statu quo mejorado): más simple, pero no explota la palanca social ni refuerza la filosofía.",
+          "Insignias o medallas individuales sin comparación entre usuarios: gamificación sin el gancho competitivo, menos motivadora para una comunidad que ya se conoce.",
         ],
         finalStructure:
           "Pasos\n  ├── Contador diario (objetivo personal)\n  └── Ranking entre clientes (posición por objetivo cumplido)\n        └── alimenta el score del ciclo (% días con objetivo)",
@@ -102,16 +102,16 @@ export const casos: CaseStudy[] = [
         number: "02",
         title: "De una lista plana a una dieta con capas",
         area: "Consulta de dieta / experiencia diaria del cliente",
-        from: "La pantalla de dieta de la v1 separaba las dos decisiones del usuario en dos pantallas (elegir comida, luego ver opciones): dos taps, dos momentos de orientación. Y era una lista sin variedad: sin recetas, sin equivalencias, sin forma de ver cantidades en el formato que cada cliente prefiere. Pura consulta rápida antes de comer, tratada como un documento.",
+        from: "La pantalla de dieta de la v1 separaba las dos decisiones del usuario en dos pantallas, y además era una lista sin variedad: sin recetas, sin equivalencias, sin forma de ver las cantidades en el formato que cada cliente prefiere. Pura consulta rápida antes de comer, tratada como un documento.",
         decided: [
-          "Chips para navegar entre comidas del día y cards con la foto del plato a ancho completo como protagonista, con un badge de 'Opción 1/2/3'. La comida es visual: ver el plato reduce la carga de la decisión más que cualquier texto. Basado en el dato de que el 58% abre la app justo antes de comer — cada pantalla extra es fricción real.",
+          "Chips para navegar entre las comidas del día y cards con la foto del plato a ancho completo como protagonista, con un badge de 'Opción 1/2/3'. La comida es visual: ver el plato reduce la carga de la decisión más que cualquier texto. Todo apoyado en el dato de que el 58% abre la app justo antes de comer, cuando cada pantalla extra es fricción real.",
           "Acordeón de ingredientes dentro de la card (uno abierto a la vez): verificar cantidades sin cambiar de pantalla ni perder de vista las otras opciones.",
           "Pantalla de detalle con tabs por opción, toggle Raciones/Unidades, equivalencias de ingredientes para sustituciones y recetas asociadas. Las recetas se construyen sobre los mismos ingredient_id de la opción del cliente, así el match es por construcción y las cantidades se personalizan con un join directo.",
         ],
         alternatives: [
           "Tabs fijos con las comidas: más limpio, pero las abreviaturas (C.2, C.3) perdían contexto.",
-          "Lista + bottom sheet: comunica el día entero pero obligaba a definir el comportamiento del sheet.",
-          "Timeline vertical con la comida actual expandida: legible ('estás aquí') pero más pesado para el caso principal de consulta rápida. Se combinó lo mejor: navegación por chips + cards ricas.",
+          "Lista con bottom sheet: comunica el día entero pero obligaba a definir el comportamiento del sheet.",
+          "Timeline vertical con la comida actual expandida: muy legible ('estás aquí'), pero más pesado para el caso principal de consulta rápida. Al final combinamos lo mejor: navegación por chips con cards ricas.",
         ],
         finalStructure:
           "Pantalla dieta\n  ├── Chips → navegar comidas del día\n  └── Cards por opción (foto full-width + badge + nombre)\n        └── [Ingredientes] accordion con cantidades\n              └── Ver recetas y detalle → Detalle\n\nDetalle\n  ├── Tabs 1/2/3 · Imagen grande\n  ├── Toggle Raciones/Unidades\n  ├── Equivalencias de ingredientes\n  └── Recetas asociadas",
@@ -120,47 +120,47 @@ export const casos: CaseStudy[] = [
         number: "03",
         title: "De solo fuerza a varias experiencias, y de 'ayer' a 'estoy mejorando'",
         area: "Retención / motivación / progreso de entrenamiento",
-        from: "La v1 ofrecía una sola experiencia de entrenamiento: fuerza. Y el histórico de marcas mostraba la última marca de la última sesión — un snapshot de 'qué hice ayer', útil como referencia de carga pero sin ninguna señal de tendencia. No respondía a la pregunta que retiene: '¿estoy mejorando?'.",
+        from: "La v1 ofrecía una sola experiencia de entrenamiento: fuerza. Y el histórico de marcas era una lista plana de todos los entrenos realizados, además fuera del flujo donde hacía falta. Para saber cuál había sido tu último peso en press banca tenías que salir del entreno, adivinar en qué sesión pasada aparecía ese ejercicio, mirar el resultado y volver. No le mostrábamos al cliente su progreso: el entreno era un checklist que cumplir, sin ninguna motivación interna.",
         decided: [
-          "Se amplió la oferta a varias modalidades: además de fuerza, híbrido, running y Hyrox — cada una con su propia métrica (kg, tiempo mm:ss, rondas, AMRAP). El producto deja de asumir un único tipo de cliente.",
-          "Se cambió la granularidad: de 'última marca por sesión' a 'evolución por ejercicio'. Cada ejercicio es una tarjeta con una línea de progreso a lo largo de las sesiones. El cambio no es de datos (ambos tienen el historial) sino de qué pregunta se considera más relevante.",
-          "El header de cada tarjeta muestra el valor actual y el delta respecto a la sesión anterior en color de marca: la mejora es el dato protagonista, no el valor absoluto. Una curva ascendente en 8 semanas es un argumento que ninguna fila de tabla da.",
+          "Ampliamos la oferta a varias modalidades: además de fuerza, híbrido, running y Hyrox, cada una con su propia métrica (kg, tiempo en mm:ss, rondas, AMRAP). El producto deja de asumir un único tipo de cliente.",
+          "Cambiamos la granularidad: de 'última marca por sesión' a 'evolución por ejercicio'. Cada ejercicio es una tarjeta con una línea de progreso a lo largo de las sesiones, y la mostramos en varios puntos del flujo de entreno en su forma más relevante. El cambio no es de datos (ambos tienen el historial) sino de qué pregunta consideramos más importante responder.",
+          "En el gráfico, el header de cada tarjeta muestra el valor actual y el delta respecto a la sesión anterior en color de marca: la mejora es el dato protagonista, no el valor absoluto. La última marca por sesión sigue existiendo, pero la movimos a la hoja del ejercicio individual, donde de verdad la necesitas: mientras entrenas y registras las series.",
         ],
         alternatives: [
-          "Mantener la última marca por sesión (statu quo): operativamente útil para preparar la sesión, pero sin valor narrativo ni motivacional.",
-          "Un único gráfico agregado de 'volumen total': esconde el progreso por ejercicio, que es lo que el usuario reconoce como suyo.",
+          "Enseñar solo la última marca por sesión en la pantalla principal (el statu quo): operativamente útil para preparar la sesión, pero sin valor narrativo ni motivacional. La reubicamos en la hoja del ejercicio individual.",
+          "Un único gráfico agregado de 'volumen total': esconde el progreso por ejercicio, que es justo lo que el usuario reconoce como suyo.",
         ],
         finalStructure:
-          "Marcas por ejercicio (7 tipos)\n  └── Tarjeta por ejercicio\n        ├── Valor actual + delta vs sesión anterior (color marca)\n        └── Línea de progreso sobre sesiones completadas\n              └── empty state si 0 sesiones",
+          "Marcas por ejercicio (7 tipos)\n  └── Tarjeta por ejercicio\n        ├── Valor actual + delta vs sesión anterior (color marca)\n        └── Línea de progreso sobre sesiones completadas\n              └── empty state si 0 sesiones\n\nHoja del ejercicio individual (mientras entrenas)\n  └── Última marca por sesión + registro de series",
       },
       {
         number: "04",
         title: "Una puerta de entrada sin fricción, para nuevos y antiguos",
-        area: "Onboarding / activación / autenticación",
-        from: "La entrada de la v1 dependía de email y contraseña, con un flujo largo. Al añadir social logins (Google/Apple) aparece un problema que no es trivial: los usuarios antiguos ya tienen cuenta con email; si entran ahora con un social, no se debe crear una cuenta duplicada ni dejar huérfano su historial. Y los usuarios nuevos deben poder hacer el alta con un social de forma directa, sin pasar por un formulario.",
+        area: "Autenticación / onboarding / arranque de la app",
+        from: "La entrada de la v1 dependía de email y contraseña. Al añadir social login (Apple y Google) apareció un enredo que en el fondo no era de login sino de señales. La misma pantalla de acceso no solo iniciaba sesión: también registraba. Con un email sin dar de alta saltaba a 'Crear cuenta', y Apple o Google creaban una identidad nueva en silencio. Mientras tanto, el arranque tenía que decidir en una fracción de segundo algo binario: este usuario, ¿es nuevo y va al cuestionario de onboarding, o ya existe y va directo a su programa? Esa decisión se rompía, y el síntoma era una cohorte de usuarios con el cuestionario vacío: llegaban al producto sin haber respondido nunca el onboarding, con el dashboard en blanco y sugerencias de dieta absurdas.",
         decided: [
-          "Dos caminos, un solo resultado. Usuario nuevo: alta directa con el social — cero fricción, sin formulario. Usuario antiguo: al entrar con un social cuyo email coincide con una cuenta existente, se sincroniza (vincula) el social a esa cuenta en lugar de crear una nueva, conservando todo su historial.",
-          "La clave del diseño es que el email es el identificador de reconciliación: el mismo email de la cuenta vieja y del social hacen match, así que 'entrar con Google' sobre una cuenta preexistente se resuelve como vinculación silenciosa, no como registro.",
-          "Se simplificó y explicó el flujo de entrada para que el usuario nunca tenga que entender esta complejidad: entra como quiere entrar y acaba en su cuenta de siempre.",
+          "La distinción entre nuevo y antiguo dejó de depender de por qué puerta entrabas. Lo que manda ahora es una señal explícita, isNewUser (¿se acaba de crear la cuenta?), que empezamos a propagar también en el alta por email, no solo en la social. Si la cuenta es nueva, el usuario se desvía al onboarding aunque haya entrado por el botón de 'iniciar sesión'.",
+          "El arranque dejó de fiarse de si existía la fila del cuestionario, que era una señal mentirosa: muchos flujos parciales (editar el perfil, campos del registro, el propio social login) creaban esa fila con uno o dos campos y marcaban al usuario como 'completado' para siempre. Pasamos a decidir sobre el núcleo real del cuestionario: género, altura, peso, objetivo, experiencia y lugar de entreno.",
+          "Endurecimos la pantalla de carga para que no se colgara: si el perfil llega degradado, en vez de bloquearse, la app se recupera enviando al login. El usuario nunca ve esta complejidad: entra como quiere entrar y acaba donde le toca, el nuevo en el onboarding y el antiguo en su programa, con su historial intacto.",
         ],
         alternatives: [
-          "Tratar cada social como cuenta nueva siempre: rompe el historial de los usuarios antiguos y genera duplicados.",
-          "Obligar a los antiguos a migrar manualmente vinculando desde ajustes: más control pero fricción y abandono; la mayoría no lo haría.",
+          "Fiarse del botón que pulsó el usuario ('iniciar sesión' frente a 'registrarse'): se rompe porque la misma pantalla también registra, así que un usuario nuevo podía colarse por la puerta de login directo al programa.",
+          "Decidir sobre si existe la fila del cuestionario: es una mentira, porque otros flujos la crean sin que el usuario haya respondido nada y lo dejan marcado como completado de forma permanente.",
         ],
         finalStructure:
-          "Entrada\n  ├── Nuevo → social login → alta directa (sin formulario)\n  └── Antiguo → social login\n        └── email coincide con cuenta existente\n              → vincular social a esa cuenta (conserva historial)",
+          "Arranque de la app\n  └── ¿Cuenta recién creada? (isNewUser)\n        ├── Sí → Onboarding (aunque entre por 'iniciar sesión')\n        └── No → ¿Núcleo del cuestionario completo?\n              ├── Sí → su programa\n              └── No → Onboarding",
       },
     ],
     rest: [
       {
         title: "Rediseño de Revisiones",
         summary:
-          "De 'Progreso' a 'Revisiones': comparador foto como hero, score por ciclo con racha, y fuera los memes de los estados vacíos.",
+          "De 'Progreso' a 'Revisiones': comparador de fotos como hero, score por ciclo con racha, y fuera los memes de los estados vacíos.",
       },
       {
         title: "% graso: IA + validación del coach",
         summary:
-          "Decisión de producto con research de precisión real (sesgo de género, MAE); la IA propone y el coach firma para proteger el valor del tier coached.",
+          "Decisión de producto con research de precisión real (sesgo de género, MAE): la IA propone y el coach firma, para proteger el valor del tier coached.",
       },
       {
         title: "Teléfono en el onboarding",
@@ -169,10 +169,11 @@ export const casos: CaseStudy[] = [
       },
     ],
     reflection: [
-      "Las hipótesis de perfil de usuario quedaron sin validar del todo: solo teníamos frecuencia de apertura de la app, no contexto ni motivación real de cada segmento de dieta.",
-      "Quedó deuda de tokens: los colores del gráfico de marcas (verde, grid lines, labels) están hardcodeados en lugar de usar variables del sistema de diseño.",
-      "El empty state de 'sin marcas que mostrar aún' solo se implementó para el tipo de entreno Default; los otros 6 tipos (Superserie, Circuito, Hyrox×4) se quedaron sin ese estado.",
-      "Quedó por validar si el comparador de revisiones (primera foto vs última) debería poder compararse entre cualquier par de revisiones, no solo primera y última — eso lo pasaría de estático a interactivo.",
+      "Las hipótesis de perfil de usuario quedaron sin validar del todo: teníamos frecuencia de apertura y algunas entrevistas, pero no un contexto claro de la motivación real de cada segmento de dieta.",
+      "Quedó deuda de tokens: los colores del gráfico de marcas (verde, líneas de rejilla, etiquetas) están hardcodeados en lugar de usar variables del sistema de diseño.",
+      "El empty state de 'sin marcas que mostrar aún' solo se implementó para el tipo de entreno Default; los otros seis tipos (Superserie, Circuito y los cuatro de Hyrox) se quedaron sin ese estado.",
+      "Quedó por validar si el comparador de revisiones (primera foto frente a última) debería poder comparar cualquier par de revisiones, no solo la primera y la última, lo que lo pasaría de estático a interactivo.",
+      "El enredo de los logins llegó tarde y sin spec previo. Documentarlo a posteriori dejó claro que las señales de arranque (quién es nuevo, qué cuenta como onboarding completo) deberían haberse definido antes de tocar la pantalla de acceso.",
     ],
     nextCase: {
       slug: "asesorias-v2-dash",
@@ -186,4 +187,3 @@ export const casos: CaseStudy[] = [
 export function getCaso(slug: string): CaseStudy | undefined {
   return casos.find((caso) => caso.slug === slug);
 }
-
