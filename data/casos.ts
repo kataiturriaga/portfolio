@@ -15,9 +15,17 @@ export type CaseGlanceData = {
   solution: string;
 };
 
+export type ImpactMetric = {
+  value: string; // p.ej. "Por medir" o "-12%"
+  label: string; // p.ej. "% de cancelaciones"
+  note?: string; // aclaración corta opcional
+  pending?: boolean; // true = placeholder aún sin dato real
+};
+
 export type Decision = {
   number: string; // "01".."04"
   title: string;
+  summary: string; // resumen de una línea para la vista corta
   area: string;
   from: string; // "de dónde veníamos"
   decided: string[]; // "qué decidimos y por qué"
@@ -35,6 +43,7 @@ export type CaseStudy = {
   thesis: string;
   subthesis: string;
   glance: CaseGlanceData;
+  impact: ImpactMetric[];
   problem: CaseProse;
   howWeWorked: CaseProse;
   decisions: Decision[];
@@ -63,6 +72,29 @@ export const casos: CaseStudy[] = [
       solution:
         "Rediseño de la v1 a la v2 que añade capas de información y experiencias a cada flujo clave del cliente.",
     },
+    impact: [
+      {
+        value: "Por medir",
+        label: "Retención del cliente coached",
+        note: "v2 en producción desde julio de 2026",
+        pending: true,
+      },
+      {
+        value: "Por medir",
+        label: "% de cancelaciones",
+        pending: true,
+      },
+      {
+        value: "Por medir",
+        label: "Adherencia (entrenos completados)",
+        pending: true,
+      },
+      {
+        value: "Por medir",
+        label: "Uso del ranking de pasos",
+        pending: true,
+      },
+    ],
     problem: {
       eyebrow: "El problema",
       title: "Pagaban más, recibían menos",
@@ -84,6 +116,7 @@ export const casos: CaseStudy[] = [
       {
         number: "01",
         title: "El contador de pasos se convierte en juego",
+        summary: "El contador de pasos pasa de dato pasivo a un ranking social que refuerza la filosofía de la marca.",
         area: "Retención / gamificación / filosofía de marca",
         from: "En la v1 la app tenía un contador de pasos: un número pasivo que registraba el día y no llevaba a ninguna parte. El objetivo de pasos diarios es una de las patas de la filosofía del método, combinar el entrenamiento de fuerza (u otras modalidades) con movimiento moderado, andar. Pero el producto no lo trataba como algo que importara.",
         decided: [
@@ -101,6 +134,7 @@ export const casos: CaseStudy[] = [
       {
         number: "02",
         title: "De una lista plana a una dieta con capas",
+        summary: "La dieta pasa de una lista plana a una experiencia visual con recetas, equivalencias y raciones.",
         area: "Consulta de dieta / experiencia diaria del cliente",
         from: "La pantalla de dieta de la v1 separaba las dos decisiones del usuario en dos pantallas, y además era una lista sin variedad: sin recetas, sin equivalencias, sin forma de ver las cantidades en el formato que cada cliente prefiere. Pura consulta rápida antes de comer, tratada como un documento.",
         decided: [
@@ -119,6 +153,7 @@ export const casos: CaseStudy[] = [
       {
         number: "03",
         title: "De solo fuerza a varias experiencias, y de 'ayer' a 'estoy mejorando'",
+        summary: "De solo fuerza a cuatro modalidades, y de 'qué hice ayer' a 'estoy mejorando' por ejercicio.",
         area: "Retención / motivación / progreso de entrenamiento",
         from: "La v1 ofrecía una sola experiencia de entrenamiento: fuerza. Y el histórico de marcas era una lista plana de todos los entrenos realizados, además fuera del flujo donde hacía falta. Para saber cuál había sido tu último peso en press banca tenías que salir del entreno, adivinar en qué sesión pasada aparecía ese ejercicio, mirar el resultado y volver. No le mostrábamos al cliente su progreso: el entreno era un checklist que cumplir, sin ninguna motivación interna.",
         decided: [
@@ -136,6 +171,7 @@ export const casos: CaseStudy[] = [
       {
         number: "04",
         title: "Una puerta de entrada sin fricción, para nuevos y antiguos",
+        summary: "Una sola pantalla de acceso decide por identidad y optimiza para el 98% que son usuarios que ya existen.",
         area: "Autenticación / onboarding / entrada a la app",
         from: "En la v1 se entraba solo con email y contraseña. Al añadir 'entrar con Google o Apple' apareció un lío: la misma pantalla servía para dos cosas a la vez, iniciar sesión si ya tenías cuenta y registrarte si eras nuevo, y la app no distinguía bien quién era quién. El resultado eran usuarios nuevos que se saltaban el cuestionario inicial y entraban con la app vacía: sin datos, sin dashboard y con dietas recomendadas sin sentido, porque nunca habían dicho su objetivo, su peso o su altura. Encima había una trampa: la app daba por hecho el cuestionario a cualquiera que tuviera guardado aunque fuera un solo dato, aunque no hubiera respondido nada, y así mucha gente quedaba marcada como 'ya lo hizo' sin haberlo hecho.",
         decided: [
