@@ -15,7 +15,7 @@ export default function CaseViewToggle({
   onChange: (v: CaseView) => void;
 }) {
   return (
-    <div className="paper-shell case-toggle" role="group" aria-label="Modo de lectura">
+    <div className="case-toggle" role="group" aria-label="Modo de lectura">
       {OPTIONS.map((opt) => {
         const selected = view === opt.value;
         return (
