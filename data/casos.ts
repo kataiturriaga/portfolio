@@ -136,19 +136,19 @@ export const casos: CaseStudy[] = [
       {
         number: "04",
         title: "Una puerta de entrada sin fricción, para nuevos y antiguos",
-        area: "Autenticación / onboarding / arranque de la app",
-        from: "La entrada de la v1 dependía de email y contraseña. Al añadir social login (Apple y Google) apareció un enredo que en el fondo no era de login sino de señales. La misma pantalla de acceso no solo iniciaba sesión: también registraba. Con un email sin dar de alta saltaba a 'Crear cuenta', y Apple o Google creaban una identidad nueva en silencio. Mientras tanto, el arranque tenía que decidir en una fracción de segundo algo binario: este usuario, ¿es nuevo y va al cuestionario de onboarding, o ya existe y va directo a su programa? Esa decisión se rompía, y el síntoma era una cohorte de usuarios con el cuestionario vacío: llegaban al producto sin haber respondido nunca el onboarding, con el dashboard en blanco y sugerencias de dieta absurdas.",
+        area: "Autenticación / onboarding / entrada a la app",
+        from: "En la v1 se entraba solo con email y contraseña. Al añadir 'entrar con Google o Apple' apareció un lío: la misma pantalla servía para dos cosas a la vez, iniciar sesión si ya tenías cuenta y registrarte si eras nuevo, y la app no distinguía bien quién era quién. El resultado eran usuarios nuevos que se saltaban el cuestionario inicial y entraban con la app vacía: sin datos, sin dashboard y con dietas recomendadas sin sentido, porque nunca habían dicho su objetivo, su peso o su altura. Encima había una trampa: la app daba por hecho el cuestionario a cualquiera que tuviera guardado aunque fuera un solo dato, aunque no hubiera respondido nada, y así mucha gente quedaba marcada como 'ya lo hizo' sin haberlo hecho.",
         decided: [
-          "La distinción entre nuevo y antiguo dejó de depender de por qué puerta entrabas. Lo que manda ahora es una señal explícita, isNewUser (¿se acaba de crear la cuenta?), que empezamos a propagar también en el alta por email, no solo en la social. Si la cuenta es nueva, el usuario se desvía al onboarding aunque haya entrado por el botón de 'iniciar sesión'.",
-          "El arranque dejó de fiarse de si existía la fila del cuestionario, que era una señal mentirosa: muchos flujos parciales (editar el perfil, campos del registro, el propio social login) creaban esa fila con uno o dos campos y marcaban al usuario como 'completado' para siempre. Pasamos a decidir sobre el núcleo real del cuestionario: género, altura, peso, objetivo, experiencia y lugar de entreno.",
-          "Endurecimos la pantalla de carga para que no se colgara: si el perfil llega degradado, en vez de bloquearse, la app se recupera enviando al login. El usuario nunca ve esta complejidad: entra como quiere entrar y acaba donde le toca, el nuevo en el onboarding y el antiguo en su programa, con su historial intacto.",
+          "Dejamos de adivinar quién es nuevo según la puerta por la que entró. La app ahora se hace una pregunta clara: ¿esta cuenta se acaba de crear? Si la respuesta es sí, la persona va al cuestionario, entre por donde entre.",
+          "Y para saber si alguien ya había hecho el onboarding, dejamos de mirar 'tiene algún dato guardado' y pasamos a mirar 'ha respondido lo esencial': objetivo, peso, altura, experiencia y dónde entrena. Solo eso cuenta como cuestionario hecho.",
+          "El usuario no ve nada de esto. Entra como quiere entrar y acaba donde le toca: si es nuevo, en el cuestionario; si ya existía, directo a su plan con su historial intacto.",
         ],
         alternatives: [
-          "Fiarse del botón que pulsó el usuario ('iniciar sesión' frente a 'registrarse'): se rompe porque la misma pantalla también registra, así que un usuario nuevo podía colarse por la puerta de login directo al programa.",
-          "Decidir sobre si existe la fila del cuestionario: es una mentira, porque otros flujos la crean sin que el usuario haya respondido nada y lo dejan marcado como completado de forma permanente.",
+          "Fiarnos del botón que pulsó la persona ('iniciar sesión' o 'registrarse'): no funciona, porque la misma pantalla también registra, así que alguien nuevo podía colarse por la puerta de iniciar sesión y saltarse el cuestionario.",
+          "Dar por bueno el cuestionario en cuanto había cualquier dato guardado: era justo la trampa que causaba el problema, gente marcada como 'ya lo hizo' sin haber respondido nada.",
         ],
         finalStructure:
-          "Arranque de la app\n  └── ¿Cuenta recién creada? (isNewUser)\n        ├── Sí → Onboarding (aunque entre por 'iniciar sesión')\n        └── No → ¿Núcleo del cuestionario completo?\n              ├── Sí → su programa\n              └── No → Onboarding",
+          "Al abrir la app\n  └── ¿La cuenta se acaba de crear?\n        ├── Sí → Cuestionario (entre por donde entre)\n        └── No → ¿Ha respondido lo esencial?\n              ├── Sí → directo a su plan\n              └── No → Cuestionario",
       },
     ],
     rest: [
@@ -173,7 +173,7 @@ export const casos: CaseStudy[] = [
       "Quedó deuda de tokens: los colores del gráfico de marcas (verde, líneas de rejilla, etiquetas) están hardcodeados en lugar de usar variables del sistema de diseño.",
       "El empty state de 'sin marcas que mostrar aún' solo se implementó para el tipo de entreno Default; los otros seis tipos (Superserie, Circuito y los cuatro de Hyrox) se quedaron sin ese estado.",
       "Quedó por validar si el comparador de revisiones (primera foto frente a última) debería poder comparar cualquier par de revisiones, no solo la primera y la última, lo que lo pasaría de estático a interactivo.",
-      "El enredo de los logins llegó tarde y sin spec previo. Documentarlo a posteriori dejó claro que las señales de arranque (quién es nuevo, qué cuenta como onboarding completo) deberían haberse definido antes de tocar la pantalla de acceso.",
+      "El lío de los logins llegó tarde y sin definición previa. Documentarlo después dejó claro que las reglas de entrada (quién es nuevo y qué cuenta como cuestionario hecho) deberían haberse decidido antes de tocar la pantalla de acceso.",
     ],
     nextCase: {
       slug: "asesorias-v2-dash",
