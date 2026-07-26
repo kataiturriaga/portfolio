@@ -2784,7 +2784,7 @@ button {
   padding: 1.5rem;
   overflow-x: auto;
   border: 1px solid #d3cec6;
-  border-radius: 12px;
+  border-radius: 8px;
   background: var(--paper-deep);
   color: var(--ink);
   font-family: var(--mono);
@@ -2802,7 +2802,7 @@ button {
   width: 100%;
   height: auto;
   border: 1px solid #d3cec6;
-  border-radius: 12px;
+  border-radius: 8px;
 }
 
 .case-decision__media figcaption {
@@ -2821,7 +2821,7 @@ button {
   padding: clamp(1rem, 3vw, 1.75rem);
   background: var(--surface);
   border: 1px solid #d3cec6;
-  border-radius: 12px;
+  border-radius: 8px;
 }
 
 .case-compare__side {
