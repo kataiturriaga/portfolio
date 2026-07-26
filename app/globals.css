@@ -3191,6 +3191,7 @@ button {
   /* el texto se pinta con el color opuesto a lo que tiene detrás (crema o la foto) */
   color: #ffffff;
   mix-blend-mode: difference;
+  z-index: 2;
 }
 
 .case-sidenav__back {
