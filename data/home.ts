@@ -31,15 +31,29 @@ export const quickLinks = [
   },
 ];
 
-export const projects = [
+export type Project = {
+  number: string;
+  client: string;
+  title: string;
+  year: string;
+  domain: string;
+  role: string;
+  tone: string;
+  image?: string;
+  href?: string;
+};
+
+export const projects: Project[] = [
   {
     number: "01",
-    client: "Órbita",
-    title: "Inteligencia de mercado, sin ruido",
+    client: "El Método",
+    title: "Añadiendo capas: la app coached de la v1 a la v2",
     year: "LANZADO · 2026",
-    domain: "B2B SaaS",
-    role: "Diseño de producto",
+    domain: "Salud y fitness",
+    role: "Product Designer + PM",
     tone: "cobalt",
+    image: "/casos/asesorias-v2-app/hero-v2-app-final.jpg",
+    href: "/casos/asesorias-v2-app",
   },
   {
     number: "02",

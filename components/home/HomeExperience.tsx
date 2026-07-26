@@ -219,15 +219,25 @@ function FeaturedWork() {
             <Reveal key={project.number} delay={(index % 2) * 0.08}>
               <article className="project-card">
                 <div
-                  className={`project-card__visual project-card__visual--${project.tone}`}
+                  className={`project-card__visual project-card__visual--${project.tone}${
+                    project.image ? " project-card__visual--image" : ""
+                  }`}
                   aria-hidden="true"
                 >
                   <span>{project.client}</span>
-                  <div className="project-card__window">
-                    <i />
-                    <i />
-                    <i />
-                  </div>
+                  {project.image ? (
+                    <img
+                      className="project-card__thumb"
+                      src={project.image}
+                      alt=""
+                    />
+                  ) : (
+                    <div className="project-card__window">
+                      <i />
+                      <i />
+                      <i />
+                    </div>
+                  )}
                   <strong>{project.number}</strong>
                 </div>
                 <div className="project-card__body">
@@ -236,9 +246,11 @@ function FeaturedWork() {
                     <span>{project.year}</span>
                   </div>
                   <h3>{project.title}</h3>
-                  <a href="#contacto">
-                    {content.copy.work.projectAction}
-                  </a>
+                  {project.href ? (
+                    <Link href={project.href}>Ver el caso →</Link>
+                  ) : (
+                    <a href="#contacto">{content.copy.work.projectAction}</a>
+                  )}
                   <div className="project-card__foot">
                     <span>{project.domain}</span>
                     <span>{project.role}</span>
