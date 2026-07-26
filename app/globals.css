@@ -2506,6 +2506,7 @@ button {
 }
 
 .case-hero__media {
+  position: relative;
   margin-top: clamp(2.5rem, 6vw, 4rem);
   /* full-bleed: rompe la columna de contenido y ocupa todo el ancho */
   width: 100vw;
@@ -2516,6 +2517,21 @@ button {
   display: block;
   width: 100%;
   height: auto;
+}
+
+/* degradado oscuro en la franja izquierda para que el menú (mix-blend difference)
+   se invierta con nitidez sobre la foto */
+.case-hero__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.55),
+    rgba(0, 0, 0, 0.3) 18%,
+    transparent 38%
+  );
 }
 
 .case-hero__media figcaption {
