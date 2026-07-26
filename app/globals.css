@@ -2783,7 +2783,8 @@ button {
   margin: 2rem 0 0;
   padding: 1.5rem;
   overflow-x: auto;
-  border: 1px solid var(--ink);
+  border: 1px solid #d3cec6;
+  border-radius: 12px;
   background: var(--paper-deep);
   color: var(--ink);
   font-family: var(--mono);
@@ -2800,7 +2801,8 @@ button {
   display: block;
   width: 100%;
   height: auto;
-  border: 1px solid var(--ink);
+  border: 1px solid #d3cec6;
+  border-radius: 12px;
 }
 
 .case-decision__media figcaption {
@@ -2818,7 +2820,8 @@ button {
   margin-top: clamp(2rem, 5vw, 3rem);
   padding: clamp(1rem, 3vw, 1.75rem);
   background: var(--surface);
-  border: 1px solid var(--ink);
+  border: 1px solid #d3cec6;
+  border-radius: 12px;
 }
 
 .case-compare__side {
@@ -2845,6 +2848,7 @@ button {
   display: block;
   width: 100%;
   height: auto;
+  border-radius: 8px;
 }
 
 @media (max-width: 720px) {
