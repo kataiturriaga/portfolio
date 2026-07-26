@@ -50,6 +50,34 @@ export default function CaseDecision({ decision }: { decision: Decision }) {
           ) : null}
         </figure>
       ) : null}
+
+      {decision.comparison ? (
+        <div className="case-compare">
+          <figure className="case-compare__side">
+            <span className="case-compare__label">
+              {decision.comparison.beforeLabel ?? "Antes"}
+            </span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={decision.comparison.before.src}
+              alt={decision.comparison.before.alt}
+            />
+          </figure>
+          <figure className="case-compare__side">
+            <span className="case-compare__label case-compare__label--after">
+              {decision.comparison.afterLabel ?? "Ahora"}
+            </span>
+            <video
+              src={decision.comparison.after.src}
+              autoPlay
+              loop
+              muted
+              playsInline
+              aria-label={decision.comparison.after.alt}
+            />
+          </figure>
+        </div>
+      ) : null}
     </section>
   );
 }
