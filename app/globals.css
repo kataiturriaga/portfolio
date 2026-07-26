@@ -2810,12 +2810,15 @@ button {
   font-size: 0.72rem;
 }
 
-/* Comparación antes / después */
+/* Comparación antes / después, dentro de un cuadro al estilo de la foto de arriba */
 .case-compare {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(1rem, 3vw, 2rem);
   margin-top: clamp(2rem, 5vw, 3rem);
+  padding: clamp(1rem, 3vw, 1.75rem);
+  background: var(--surface);
+  border: 1px solid var(--ink);
 }
 
 .case-compare__side {
@@ -2842,8 +2845,6 @@ button {
   display: block;
   width: 100%;
   height: auto;
-  border: 1px solid var(--rule);
-  border-radius: 6px;
 }
 
 @media (max-width: 720px) {
