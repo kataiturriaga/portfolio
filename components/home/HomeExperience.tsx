@@ -210,7 +210,17 @@ function ProjectCardInner({ project }: { project: Project }) {
       <div
         className={`project-card__thumb-wrap project-card__thumb-wrap--${project.tone}`}
       >
-        {project.image ? (
+        {project.video ? (
+          <video
+            className="project-card__thumb"
+            src={project.video}
+            poster={project.image}
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
+        ) : project.image ? (
           <img className="project-card__thumb" src={project.image} alt="" />
         ) : null}
       </div>

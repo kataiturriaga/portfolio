@@ -40,6 +40,7 @@ export type Project = {
   role: string;
   tone: string;
   image?: string;
+  video?: string;
   href?: string;
 };
 
@@ -53,6 +54,7 @@ export const projects: Project[] = [
     role: "Product Designer + PM",
     tone: "cobalt",
     image: "/casos/asesorias-v2-app/hero-v2-app-final.jpg",
+    video: "/casos/asesorias-v2-app/978_1080x30_shots_so.mp4",
     href: "/casos/asesorias-v2-app",
   },
   {
