@@ -473,21 +473,92 @@ button {
 /* Work */
 .work-section {
   padding: var(--section-space) 0;
-  background: var(--surface);
-  border-top: 1px solid var(--ink);
-  border-bottom: 1px solid var(--ink);
+  background: #141414;
+  color: #f4f1ec;
+}
+
+.work-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.work-eyebrow {
+  color: var(--red);
+}
+
+.work-title {
+  margin: 0.6rem 0 0;
+  font-family: var(--serif);
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  color: #ffffff;
+}
+
+.work-title em {
+  font-style: italic;
+  color: var(--red);
+}
+
+.work-intro {
+  max-width: 24ch;
+  text-align: right;
+  color: rgba(244, 241, 236, 0.6);
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  line-height: 1.45;
 }
 
 .project-grid {
   display: grid;
   grid-template-columns: repeat(var(--project-columns), 1fr);
-  gap: var(--project-row-gap) 1px;
-  background: var(--rule);
+  gap: clamp(2.5rem, 5vw, 4rem) 2rem;
+  background: transparent;
 }
 
 .project-card {
+  display: block;
   height: 100%;
-  background: var(--surface);
+  background: transparent;
+  color: inherit;
+}
+
+.project-card--link {
+  transition: opacity 0.2s ease;
+}
+
+.project-card--link:hover {
+  opacity: 0.9;
+}
+
+.project-card__thumb-wrap {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #222;
+}
+
+.project-card__thumb-wrap--cobalt {
+  background: #193dca;
+}
+.project-card__thumb-wrap--coral {
+  background: #ff7259;
+}
+.project-card__thumb-wrap--lime {
+  background: #c9e83d;
+}
+.project-card__thumb-wrap--violet {
+  background: #8d6bd7;
+}
+.project-card__thumb-wrap--amber {
+  background: #f3af28;
+}
+.project-card__thumb-wrap--ink {
+  background: #3a3a3a;
 }
 
 .project-card__visual {
@@ -621,52 +692,35 @@ button {
 }
 
 .project-card__body {
-  padding: 1.5rem 0 0;
+  padding: 1.25rem 0 0;
 }
 
-.project-card:nth-child(odd) .project-card__body,
-.project-grid > div:nth-child(odd) .project-card__body {
-  padding-right: 2rem;
+.project-card__meta {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--red);
 }
 
-.project-card:nth-child(even) .project-card__body,
-.project-grid > div:nth-child(even) .project-card__body {
-  padding-left: 2rem;
+.project-card h3 {
+  margin: 0.85rem 0;
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  color: #ffffff;
 }
 
-.project-card__meta,
 .project-card__foot {
   display: flex;
-  justify-content: space-between;
-  gap: 1rem;
+  gap: 1.5rem;
   font-family: var(--mono);
   font-size: 0.63rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-}
-
-.project-card h3 {
-  max-width: 590px;
-  margin: 1.8rem 0 1.2rem;
-  font-family: var(--serif);
-  font-size: clamp(2.2rem, 4.2vw, var(--project-display-max));
-  font-weight: var(--project-serif-weight, var(--font-serif-weight, 400));
-  letter-spacing: -0.055em;
-  line-height: 0.98;
-}
-
-.project-card__body > a {
-  display: inline-block;
-  margin-bottom: 2.2rem;
-  padding-bottom: 0.2rem;
-  border-bottom: 1px solid;
-  font-weight: 650;
-}
-
-.project-card__foot {
-  padding: 1rem 0;
-  border-top: 1px solid var(--rule);
-  color: var(--ink-soft);
+  color: rgba(244, 241, 236, 0.55);
 }
 
 .catalogue {
@@ -728,6 +782,29 @@ button {
   margin-right: 0.75rem;
   color: var(--red);
   content: "·";
+}
+
+/* Catálogo y próximo número sobre el fondo oscuro de la sección */
+.work-section .catalogue {
+  border-color: rgba(255, 255, 255, 0.25);
+}
+.work-section .catalogue h3,
+.work-section .next-issue li {
+  color: #ffffff;
+}
+.work-section .catalogue span,
+.work-section .next-issue > p {
+  color: rgba(244, 241, 236, 0.6);
+}
+.work-section .button-link {
+  border-color: rgba(255, 255, 255, 0.35);
+  color: inherit;
+}
+.work-section .button-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+.work-section .next-issue li {
+  border-color: rgba(255, 255, 255, 0.14);
 }
 
 /* Industries */

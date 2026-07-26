@@ -3,7 +3,7 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
-import { homeContent } from "@/data/home";
+import { homeContent, type Project } from "@/data/home";
 import SectionHeading from "@/components/site/SectionHeading";
 import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
@@ -204,59 +204,59 @@ function QuickIndex() {
   );
 }
 
+function ProjectCardInner({ project }: { project: Project }) {
+  return (
+    <>
+      <div
+        className={`project-card__thumb-wrap project-card__thumb-wrap--${project.tone}`}
+      >
+        {project.image ? (
+          <img className="project-card__thumb" src={project.image} alt="" />
+        ) : null}
+      </div>
+      <div className="project-card__body">
+        <div className="project-card__meta">
+          {project.client} · {project.year}
+        </div>
+        <h3>{project.title}</h3>
+        <div className="project-card__foot">
+          <span>{project.domain}</span>
+          <span>{project.role}</span>
+        </div>
+      </div>
+    </>
+  );
+}
+
 function FeaturedWork() {
   const content = useHomeContent();
   return (
     <section id="trabajo" className="work-section">
       <div className="paper-shell">
-        <SectionHeading
-          eyebrow={content.copy.work.eyebrow}
-          title={content.copy.work.title}
-        />
-        <p className="section-intro">{content.copy.work.intro}</p>
+        <div className="work-head">
+          <div>
+            <p className="eyebrow work-eyebrow">✶ {content.copy.work.eyebrow}</p>
+            <h2 className="work-title">
+              Historias elegidas a <em>mano</em>
+            </h2>
+          </div>
+          <p className="work-intro">{content.copy.work.intro}</p>
+        </div>
         <div className="project-grid">
           {content.projects.map((project, index) => (
             <Reveal key={project.number} delay={(index % 2) * 0.08}>
-              <article className="project-card">
-                <div
-                  className={`project-card__visual project-card__visual--${project.tone}${
-                    project.image ? " project-card__visual--image" : ""
-                  }`}
-                  aria-hidden="true"
+              {project.href ? (
+                <Link
+                  href={project.href}
+                  className="project-card project-card--link"
                 >
-                  <span>{project.client}</span>
-                  {project.image ? (
-                    <img
-                      className="project-card__thumb"
-                      src={project.image}
-                      alt=""
-                    />
-                  ) : (
-                    <div className="project-card__window">
-                      <i />
-                      <i />
-                      <i />
-                    </div>
-                  )}
-                  <strong>{project.number}</strong>
-                </div>
-                <div className="project-card__body">
-                  <div className="project-card__meta">
-                    <span>{project.client}</span>
-                    <span>{project.year}</span>
-                  </div>
-                  <h3>{project.title}</h3>
-                  {project.href ? (
-                    <Link href={project.href}>Ver el caso →</Link>
-                  ) : (
-                    <a href="#contacto">{content.copy.work.projectAction}</a>
-                  )}
-                  <div className="project-card__foot">
-                    <span>{project.domain}</span>
-                    <span>{project.role}</span>
-                  </div>
-                </div>
-              </article>
+                  <ProjectCardInner project={project} />
+                </Link>
+              ) : (
+                <article className="project-card">
+                  <ProjectCardInner project={project} />
+                </article>
+              )}
             </Reveal>
           ))}
         </div>
