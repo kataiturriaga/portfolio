@@ -136,6 +136,10 @@ export const casos: CaseStudy[] = [
         ],
         finalStructure:
           "Pasos\n  ├── Contador diario (objetivo personal)\n  └── Ranking entre clientes (posición por objetivo cumplido)\n        └── alimenta el score del ciclo (% días con objetivo)",
+        media: {
+          src: "/casos/asesorias-v2-app/cuentapasos-1.jpg",
+          alt: "Pantalla del cuentapasos y el ranking de pasos en la app",
+        },
       },
       {
         number: "02",
