@@ -1,5 +1,5 @@
-import HomeExperience from "@/components/home/HomeExperience";
+import WeatherHome from "@/components/weather/home/WeatherHome";
 
 export default function Home() {
-  return <HomeExperience />;
+  return <WeatherHome />;
 }

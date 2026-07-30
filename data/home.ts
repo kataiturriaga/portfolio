@@ -7,30 +7,6 @@ export const stats = [
   { value: "8M+", label: "Personas alcanzadas" },
 ];
 
-export const quickLinks = [
-  {
-    kicker: "Por los números",
-    page: "p. 08",
-    title: "Mira las métricas",
-    copy: "Sectores en los que he trabajado, desglosados por especialidad.",
-    href: "#industrias",
-  },
-  {
-    kicker: "Se dice por ahí",
-    page: "p. 14",
-    title: "Lee las referencias",
-    copy: "Lo que cuentan los equipos después de construir juntos.",
-    href: "#testimonios",
-  },
-  {
-    kicker: "La contraportada",
-    page: "p. 22",
-    title: "Juega al Mad Libs",
-    copy: "Imprime el próximo gran titular en menos de treinta segundos.",
-    href: "#mad-libs",
-  },
-];
-
 export type Project = {
   number: string;
   client: string;
@@ -174,136 +150,81 @@ export const articles = featuredProcesses.map((process) => ({
 
 export const copy = {
   header: {
-    volume: "VOL. I · N.º 01 · EDICIÓN GENERAL",
-    navWork: "Trabajo",
-    navJourney: "Trayectoria",
-    navContact: "Contacto",
-    masthead: "El Diario de Kata",
-    availability: "Disponible para proyectos",
-    edition: "Edición general",
-    requestPortfolio: "Solicitar portfolio ↓",
+    over: "Barcelona · ESP",
+    name: "Kata Iturriaga",
+    big: "4+",
+    unit: "años",
+    condition: "Product Designer",
+    hiLo: "Máx: 12 proyectos · 18 marcas",
   },
-  hero: {
-    title: "Product Designer",
-    titleConnector: "que convierte",
-    rotatingWords: ["ideas complejas", "productos útiles", "experiencias claras"],
-    stampLabel: "Diseñado en",
-    stampYear: "2026",
-    stampLocation: "Barcelona · ESP",
-    deck: "Diseño productos digitales desde la primera pregunta hasta el último detalle, conectando investigación, estrategia, interfaz y código.",
-    cta: "Ver historias destacadas",
-  },
-  quickIndex: {
-    title: "Salta a lo importante.",
-    action: "Saltar ↓",
-    darkKicker: "✶ El laboratorio",
-    darkPage: "p. 33",
-    darkTitle: "Descubre mis procesos",
-    darkCopy:
-      "Las herramientas, decisiones y rituales que utilizo para llevar cada proyecto de la idea a la entrega.",
-    darkAction: "Entrar ↗",
-  },
+  intro:
+    "Diseño productos digitales desde la primera pregunta hasta el último detalle, conectando investigación, estrategia, interfaz y código.",
+  trajectory: { title: "Previsión por horas · Trayectoria" },
   work: {
-    eyebrow: "Trabajo destacado",
-    title: "Historias elegidas a mano",
+    title: "Previsión a 6 proyectos",
     intro: "Una selección de productos lanzados y conceptos de los últimos años.",
-    projectAction: "Ver el proyecto ↗",
-    catalogueKicker: "✶ Seis historias arriba. Más dentro.",
-    catalogueTitle: "Lee el catálogo completo",
-    catalogueAction: "Explorar el archivo ↗",
-    nextIssue: "✶ En el próximo número",
+    archive: "Explorar el archivo completo",
+    next: "En el próximo parte",
     nextItems: [
       "Un sistema de conocimiento para productos con IA",
       "Cómo se construyó este mismo portfolio",
       "Dos proyectos confidenciales, pendientes de publicación",
     ],
   },
-  industries: {
-    eyebrow: "Sectores en los que he trabajado",
-    title: "Entre industrias",
-  },
-  timeline: {
-    eyebrow: "El recorrido",
-    title: "Trabajo y formación",
-    all: "Todo",
-    current: "Actual",
+  smallCards: {
+    sectors: "Sectores",
+    reach: "Alcance",
+    reachValue: "8M+",
+    reachNote: "Personas alcanzadas por los productos en los que he trabajado.",
+    brands: "Marcas",
+    brandsValue: "18",
+    brandsNote: "Marcas acompañadas en cuatro años de práctica.",
+    availability: "Condiciones actuales",
+    availabilityValue: "Disponible",
+    availabilityNote: "Abierta a nuevos proyectos y colaboraciones.",
+    location: "Ubicación",
+    locationValue: "Barcelona",
+    locationNote: "Disponible en remoto · CET",
+    lab: "El laboratorio",
+    labValue: "Procesos",
+    labNote: "Las herramientas, decisiones y rituales que llevo de la idea a la entrega.",
   },
   about: {
-    portrait: "Tu retrato",
-    portraitCaption: "✶ Hola, esa persona soy yo",
-    eyebrow: "La firma",
     title: "Sobre quien diseña",
-    signature: "Nombre Apellido",
-    signatureRole: "✶ Diseño y dirección",
     lead: "Diseñador que construye, estratega que pregunta y colaborador que entrega.",
     firstParagraph:
       "Trabajo en los espacios que quedan entre lo que las personas dicen y lo que realmente necesitan; entre lo que un producto puede hacer y lo que debería hacer. Mi práctica combina profundidad en UX, interfaz, investigación y código con pensamiento de negocio.",
     secondParagraph:
       "Me gusta llevar las ideas del boceto a una experiencia real, saber qué detalle importa en cada momento y hacer que equipos distintos avancen en la misma dirección.",
-    action: "Leer la historia completa ↗",
+    signature: "Nombre Apellido",
+    signatureRole: "Diseño y dirección",
   },
   testimonial: {
-    eyebrow: "Cartas a la redacción",
-    title: "Lo que cuentan",
-    number: "01 / 03",
+    title: "Aviso destacado · Lo que cuentan",
     quote:
       "No se limitó a resolver la pantalla. Ordenó el problema, hizo las preguntas que faltaban y consiguió que producto e ingeniería tomaran decisiones juntos.",
     person: "Marina López",
     role: "Head of Product · Empresa ejemplo",
   },
-  articles: {
-    eyebrow: "Detrás de cada proyecto",
-    title: "Procesos",
-  },
-  madlibs: {
-    eyebrow: "La contraportada · Mad Libs de la redacción",
-    title: "Ayúdame a escribir el próximo titular",
-    intro:
-      "La redacción tiene poco personal. Rellena los huecos y publicaremos lo que escribas. Sin verificar datos. Sin revisión editorial.",
-    story: "Historia n.º 01 de 03",
-    formTitle: "Rellena los huecos",
-    labels: [
-      "Un adjetivo",
-      "Un sustantivo plural",
-      "Un verbo en pasado",
-      "Un número",
-      "Otro adjetivo",
-      "Una empresa imaginaria",
-    ],
-    print: "↓ Imprimir el titular",
-    clear: "↻ Limpiar",
-    newspaper: "El Diario de Kata",
-    draft: "Borrador · Esperando contenido",
-    waiting: "Esperando noticias...",
-    empty:
-      "Rellena los seis huecos de la izquierda y pondremos la tinta, encenderemos la rotativa y publicaremos tu historia.",
-  },
-  footer: {
-    eyebrow: "Cartas a la redacción · Contacto",
-    title: "Hablemos.",
-    intro:
-      "Proyectos, equipos, colaboraciones o un café por videollamada. Escríbeme.",
+  articles: { title: "Detrás de cada proyecto · Procesos" },
+  contact: {
+    title: "Hablemos",
+    intro: "Proyectos, equipos, colaboraciones o un café por videollamada. Escríbeme.",
     reads: "Leo todos los mensajes.",
-    emailLabel: "✉ Correo",
+    emailLabel: "Correo",
     email: "hola@tudominio.com",
-    emailHint: "Haz clic para copiar →",
+    emailHint: "Haz clic para copiar",
     copied: "Copiado ✓",
-    scheduleLabel: "◷ Agenda",
+    scheduleLabel: "Agenda",
     schedule: "Reserva 30 minutos",
-    scheduleHint: "Abrir calendario ↗",
-    locationLabel: "Actualmente en",
-    location: "Barcelona · Disponible en remoto · CET",
-    availability: "■ Abierto a nuevos proyectos",
-    socialLabel: "También en",
-    signoff: "✶ Gracias por leer.",
-    signature: "La Redacción",
+    availability: "Abierto a nuevos proyectos",
+    updatedAt: "Actualizado a las",
   },
 } as const;
 
 export const homeContent = {
   copy,
   stats,
-  quickLinks,
   projects,
   industries,
   timeline,
