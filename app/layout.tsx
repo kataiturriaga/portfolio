@@ -1,34 +1,17 @@
-import type { Metadata } from "next";
-import { Caveat, Geist, Geist_Mono, Newsreader } from "next/font/google";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const newsreader = Newsreader({
-  variable: "--font-newsreader",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["300", "400", "500", "600", "700", "800"],
-});
-
-const caveat = Caveat({
-  variable: "--font-caveat",
-  subsets: ["latin"],
-  display: "swap",
-});
+import SkyProvider from "@/components/weather/SkyProvider";
+import Sky from "@/components/weather/Sky";
+import SkyControls from "@/components/weather/SkyControls";
 
 export const metadata: Metadata = {
-  title: "El Diario de Kata — Portfolio de Product Designer",
+  title: "Kata Iturriaga — Product Designer",
   description:
-    "Portfolio editorial de diseño de producto, estrategia, investigación y sistemas.",
+    "Portfolio de diseño de producto: casos, procesos y trayectoria, contados como una app del tiempo.",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0b1530",
 };
 
 export default function RootLayout({
@@ -37,11 +20,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="es"
-      className={`${geistSans.variable} ${geistMono.variable} ${newsreader.variable} ${caveat.variable} h-full antialiased`}
-    >
-      <body className="min-h-full">{children}</body>
+    <html lang="es" className="h-full antialiased">
+      <body className="min-h-full weather-body">
+        <SkyProvider>
+          <Sky />
+          <SkyControls />
+          {children}
+        </SkyProvider>
+      </body>
     </html>
   );
 }

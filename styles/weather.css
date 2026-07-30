@@ -1,0 +1,538 @@
+/* ============ Design V2 — app del Tiempo ============ */
+
+.weather-body {
+  background: #0b1530;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI",
+    Inter, Roboto, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.weather-body ::selection {
+  background: rgba(255, 255, 255, 0.9);
+  color: #0b1530;
+}
+
+.weather-body :focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.9);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ---- Cielo ---- */
+.sky {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.sky__layer {
+  position: absolute;
+  inset: 0;
+}
+
+.sky::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+}
+
+.sky__stars {
+  position: absolute;
+  inset: 0;
+}
+
+.sky__stars span {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #fff;
+  animation: star-twinkle 4s ease-in-out infinite;
+}
+
+@keyframes star-twinkle {
+  50% {
+    opacity: 0.15;
+  }
+}
+
+.sky__cloud {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  filter: blur(38px);
+  animation: cloud-drift linear infinite;
+}
+
+@keyframes cloud-drift {
+  from {
+    transform: translateX(-30vw);
+  }
+  to {
+    transform: translateX(110vw);
+  }
+}
+
+.sky__precip {
+  position: absolute;
+  inset: 0;
+}
+
+.sky__drop {
+  position: absolute;
+  top: -30px;
+  width: 1.5px;
+  height: 22px;
+  background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5));
+  animation: drop-fall linear infinite;
+}
+
+@keyframes drop-fall {
+  to {
+    transform: translateY(110vh);
+  }
+}
+
+.sky__flake {
+  position: absolute;
+  top: -12px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #fff;
+  animation: flake-fall linear infinite;
+}
+
+@keyframes flake-fall {
+  50% {
+    margin-left: 18px;
+  }
+  to {
+    transform: translateY(110vh);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sky__stars,
+  .sky__cloud,
+  .sky__precip {
+    display: none;
+  }
+}
+
+/* ---- Controles del cielo ---- */
+.sky-controls {
+  position: fixed;
+  top: 0.9rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: calc(100vw - 1.6rem);
+}
+
+.seg {
+  display: flex;
+  padding: 3px;
+  border-radius: 999px;
+  background: rgba(20, 25, 45, 0.42);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.seg button {
+  cursor: pointer;
+  padding: 0.32rem 0.72rem;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+.seg button.is-active {
+  background: rgba(255, 255, 255, 0.28);
+  color: #fff;
+}
+
+/* ---- Contenedor de página ---- */
+.weather-shell {
+  width: min(100%, 1120px);
+  margin-inline: auto;
+  padding: 6.2rem 1.1rem 7.5rem;
+}
+
+@media (min-width: 760px) {
+  .weather-shell {
+    padding-top: 7rem;
+  }
+}
+
+/* ---- Cabecera de ciudad ---- */
+.city-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem 0 2.2rem;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.18);
+}
+
+.city-header__over {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.city-header__name {
+  margin: 0.2rem 0 0;
+  font-size: clamp(2rem, 5vw, 2.6rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.city-header__big {
+  display: flex;
+  align-items: flex-start;
+  margin: 0.4rem 0 0.2rem;
+  font-size: clamp(5.2rem, 13vw, 7.5rem);
+  font-weight: 200;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.city-header__big sup {
+  margin-top: 0.6rem;
+  font-size: 0.35em;
+  font-weight: 300;
+}
+
+.city-header__condition {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.city-header__hilo {
+  margin-top: 0.25rem;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.city-compact {
+  position: fixed;
+  top: 3.6rem;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  display: flex;
+  justify-content: center;
+  gap: 0.7rem;
+  padding: 0.55rem 1rem;
+  background: rgba(15, 20, 40, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.9rem;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.city-compact span {
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 400;
+}
+
+/* ---- Tarjetas glass ---- */
+.glass-card {
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  overflow: hidden;
+}
+
+.glass-card__head {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.75rem 1rem 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-card__body {
+  padding: 0.9rem 1rem 1rem;
+}
+
+.glass-card--alert {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.glass-card a {
+  color: inherit;
+}
+
+/* ---- Rejillas ---- */
+.card-stack {
+  display: grid;
+  gap: 0.9rem;
+}
+
+@media (min-width: 760px) {
+  .card-stack {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card-stack > .span-2 {
+    grid-column: 1 / -1;
+  }
+}
+
+.small-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.9rem;
+}
+
+@media (min-width: 760px) {
+  .small-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.small-card__value {
+  font-size: 1.7rem;
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.small-card__note {
+  margin-top: 0.35rem;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.small-card--ok .small-card__value {
+  color: #7ef2a0;
+}
+
+/* ---- Filas de previsión (proyectos, listas) ---- */
+.forecast-row {
+  display: grid;
+  grid-template-columns: minmax(90px, 1fr) 24px 2fr auto;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.75rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.95rem;
+}
+
+.forecast-row:first-child {
+  border-top: 0;
+}
+
+.forecast-row__client {
+  font-weight: 600;
+}
+
+.forecast-row__title {
+  color: rgba(255, 255, 255, 0.85);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.forecast-row__year {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+}
+
+a.forecast-row {
+  transition: background 180ms ease;
+  border-radius: 10px;
+  padding-inline: 0.5rem;
+  margin-inline: -0.5rem;
+}
+
+a.forecast-row:hover {
+  background: rgba(255, 255, 255, 0.09);
+}
+
+/* ---- Franja horaria (trayectoria) ---- */
+.hour-strip {
+  display: flex;
+  gap: 0.4rem;
+  overflow-x: auto;
+  padding-bottom: 0.4rem;
+  scrollbar-width: none;
+}
+
+.hour-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.hour-strip button {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 92px;
+  padding: 0.7rem 0.5rem;
+  border-radius: 14px;
+  background: transparent;
+  color: #fff;
+  font-size: 0.72rem;
+  transition: background 180ms ease;
+}
+
+.hour-strip button:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.hour-strip button.is-active {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.hour-strip strong {
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.hour-detail {
+  margin-top: 0.8rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.9rem;
+}
+
+.hour-detail p {
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+}
+
+.hour-detail ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.hour-detail li {
+  margin: 0.2rem 0;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.7rem;
+}
+
+.chip {
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 0.68rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+/* ---- Prosa dentro de tarjetas ---- */
+.card-prose p {
+  max-width: 65ch;
+  margin: 0 0 0.9rem;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.65;
+}
+
+.card-prose p:last-child {
+  margin-bottom: 0;
+}
+
+.card-lead {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+/* ---- Barra inferior ---- */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 1.3rem calc(0.7rem + env(safe-area-inset-bottom));
+  background: rgba(15, 20, 40, 0.45);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bottom-bar a {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.85);
+  transition: background 180ms ease;
+}
+
+.bottom-bar a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.bottom-bar__dots {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.bottom-bar__dots a {
+  width: auto;
+  height: auto;
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.bottom-bar__dots a.is-active {
+  color: #fff;
+}
+
+.bottom-bar__dots .dot {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* ---- Página (transición de entrada) ---- */
+.city-screen {
+  min-height: 100vh;
+}
