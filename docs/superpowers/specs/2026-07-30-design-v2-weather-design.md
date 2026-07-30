@@ -50,7 +50,7 @@ De arriba a abajo:
 
 ### Página de caso — "ciudad" (`/casos/[slug]`)
 
-1. **Cabecera de ciudad:** kicker pequeño; "El Método" como nombre; dato gigante **"V2"**; heroTitle como línea de condición; línea Máx/Mín con periodo y rol.
+1. **Cabecera de ciudad:** kicker pequeño; el producto como nombre; el `heroTitle` como dato gigante en peso fino; el `heroSubtitle` como línea de condición; línea Máx/Mín con periodo y rol.
 2. **Tarjeta de alerta → tesis:** `thesis` + `subthesis` como banner destacado.
 3. **Cuadrícula "De un vistazo":** las 6 claves del `glance` como tarjetas pequeñas.
 4. **Tarjeta "Impacto":** métricas en grid; las `pending` atenuadas como dato no disponible ("—" + nota).
@@ -66,7 +66,7 @@ Réplica de la vista de lista del Tiempo: el cielo global se mantiene pero con u
 
 ### Procesos — "el mapa" (`/procesos`)
 
-Título grande "Procesos"; las 4 categorías de `processCategories` como **4 frentes** (Discovery, Diseño, Build, Release), cada una con su descripción. Cada proceso: tarjeta glass con número, título, propósito y **status como condición** — Borrador = nublado, Probado = parcialmente despejado, Estable = despejado (iconos SVG propios). Los `featured` primero, con tarjeta mayor.
+Título grande "Procesos"; las 4 categorías de `processCategories` como **4 frentes** (Discovery, Diseño, Build, Release), cada una con su descripción. Cada proceso: tarjeta glass con número, título, propósito y **status como condición** — Borrador = nublado, Probado = parcialmente despejado, Estable = despejado (iconos SVG propios). Los `featured` primero dentro de su frente.
 
 ### Detalle de proceso — "el parte" (`/procesos/[slug]`)
 
