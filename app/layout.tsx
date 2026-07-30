@@ -3,6 +3,8 @@ import "./globals.css";
 import SkyProvider from "@/components/weather/SkyProvider";
 import Sky from "@/components/weather/Sky";
 import SkyControls from "@/components/weather/SkyControls";
+import BottomBar from "@/components/weather/BottomBar";
+import CityPager from "@/components/weather/CityPager";
 
 export const metadata: Metadata = {
   title: "Kata Iturriaga — Product Designer",
@@ -25,7 +27,8 @@ export default function RootLayout({
         <SkyProvider>
           <Sky />
           <SkyControls />
-          {children}
+          <CityPager>{children}</CityPager>
+          <BottomBar />
         </SkyProvider>
       </body>
     </html>
