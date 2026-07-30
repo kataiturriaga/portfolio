@@ -792,3 +792,33 @@ a.forecast-row:hover {
   color: rgba(255, 255, 255, 0.7);
   white-space: nowrap;
 }
+
+/* ---- Procesos ---- */
+.map-intro {
+  max-width: 55ch;
+  margin: 0 0 1.6rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.map-category-desc {
+  margin: 0 0 0.7rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.process-steps-list {
+  margin: 0;
+  padding-left: 1.4rem;
+  line-height: 1.7;
+}
+
+.process-steps-list li {
+  margin: 0.45rem 0;
+}
+
+.process-pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-weight: 600;
+}

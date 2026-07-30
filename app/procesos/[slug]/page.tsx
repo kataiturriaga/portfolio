@@ -1,20 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import ProcessCard from "@/components/processes/ProcessCard";
-import StatusBadge from "@/components/processes/StatusBadge";
-import SiteFooter from "@/components/site/SiteFooter";
-import SiteHeader from "@/components/site/SiteHeader";
-import {
-  getProcess,
-  getProcessNeighbors,
-  getRelatedProcesses,
-  processes,
-} from "@/data/processes";
+import CityHeader from "@/components/weather/CityHeader";
+import GlassCard from "@/components/weather/GlassCard";
+import { getProcess, getProcessNeighbors, processes } from "@/data/processes";
+import { processStatusWeather } from "@/data/weather";
 
-type ProcessPageProps = {
-  params: Promise<{ slug: string }>;
-};
+type ProcessPageProps = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
   return processes.map((process) => ({ slug: process.slug }));
@@ -26,9 +18,8 @@ export async function generateMetadata({
   const { slug } = await params;
   const process = getProcess(slug);
   if (!process) return {};
-
   return {
-    title: `${process.title} — Procesos de Kata`,
+    title: `${process.title} — Procesos — Kata Iturriaga`,
     description: process.purpose,
   };
 }
@@ -38,129 +29,82 @@ export default async function ProcessDetailPage({ params }: ProcessPageProps) {
   const process = getProcess(slug);
   if (!process) notFound();
 
-  const related = getRelatedProcesses(process);
-  const { previous, next } = getProcessNeighbors(process.slug);
+  const status = processStatusWeather[process.status];
+  const { previous, next } = getProcessNeighbors(slug);
 
   return (
-    <>
-      <SiteHeader />
-      <main id="contenido" className="process-detail">
-        <article>
-          <header className="paper-shell process-detail__hero">
-            <Link href="/procesos" className="process-detail__back">
-              ← Volver al archivo
-            </Link>
-            <div className="process-detail__meta">
-              <span>/ {process.number}</span>
-              <span>{process.category}</span>
-              <StatusBadge status={process.status} />
-            </div>
-            <h1>{process.title}</h1>
-            <p>{process.purpose}</p>
-          </header>
+    <main className="weather-shell">
+      <CityHeader
+        over={`${process.category} · ${status.label}`}
+        name={process.title}
+        big={process.number}
+        condition={process.purpose}
+      />
 
-          <div className="paper-shell process-detail__body">
-            <aside className="process-detail__aside">
-              <div>
-                <span>Input</span>
-                <p>{process.input}</p>
-              </div>
-              <div>
-                <span>Output</span>
-                <p>{process.output}</p>
-              </div>
-              <div>
-                <span>Herramientas</span>
-                <ul>
-                  {process.tools.map((tool) => (
-                    <li key={tool}>{tool}</li>
-                  ))}
-                </ul>
-              </div>
-            </aside>
-
-            <div className="process-detail__content">
-              <section>
-                <p className="eyebrow">✶ Contexto de uso</p>
-                <h2>Cuándo usarlo</h2>
-                <p>{process.when}</p>
-                {process.whenNot ? (
-                  <div className="process-warning">
-                    <strong>Cuándo no</strong>
-                    <p>{process.whenNot}</p>
-                  </div>
-                ) : null}
-              </section>
-
-              <section>
-                <p className="eyebrow">✶ La secuencia</p>
-                <h2>Pasos</h2>
-                <ol className="process-steps">
-                  {process.steps.map((step, index) => (
-                    <li key={step}>
-                      <span>{String(index + 1).padStart(2, "0")}</span>
-                      <p>{step}</p>
-                    </li>
-                  ))}
-                </ol>
-              </section>
-
-              <section>
-                <p className="eyebrow">✶ Vista rápida</p>
-                <h2>El flujo</h2>
-                <p className="process-schema">{process.schema}</p>
-              </section>
-
-              {process.checklist ? (
-                <section>
-                  <p className="eyebrow">✶ Control de calidad</p>
-                  <h2>Checklist</h2>
-                  <ul className="process-checklist">
-                    {process.checklist.map((item) => (
-                      <li key={item}>
-                        <span aria-hidden="true">□</span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-              ) : null}
-            </div>
+      <div className="card-stack">
+        <GlassCard icon="sol" title="Cuándo usarlo">
+          <div className="card-prose">
+            <p>{process.when}</p>
+            {process.whenNot ? (
+              <p className="decision-from">Cuándo no: {process.whenNot}</p>
+            ) : null}
           </div>
-        </article>
+        </GlassCard>
 
-        <section className="paper-shell process-related">
-          <div className="process-related__heading">
-            <p className="eyebrow">✶ Sigue leyendo</p>
-            <h2>Procesos relacionados</h2>
+        <GlassCard icon="viento" title="Entrada → Salida">
+          <div className="card-prose">
+            <p>
+              <strong>Entrada:</strong> {process.input}
+            </p>
+            <p>
+              <strong>Salida:</strong> {process.output}
+            </p>
           </div>
-          <div className="process-related__grid">
-            {related.map((relatedProcess) => (
-              <ProcessCard key={relatedProcess.slug} process={relatedProcess} />
+        </GlassCard>
+
+        <GlassCard icon="lista" title="Pasos" className="span-2">
+          <ol className="process-steps-list">
+            {process.steps.map((step) => (
+              <li key={step.slice(0, 40)}>{step}</li>
+            ))}
+          </ol>
+        </GlassCard>
+
+        {process.checklist?.length ? (
+          <GlassCard icon="ojo" title="Checklist">
+            <ul className="decision-list">
+              {process.checklist.map((item) => (
+                <li key={item.slice(0, 40)}>{item}</li>
+              ))}
+            </ul>
+          </GlassCard>
+        ) : null}
+
+        <GlassCard icon="brujula" title="Herramientas">
+          <div className="chip-row">
+            {process.tools.map((tool) => (
+              <span key={tool} className="chip">
+                {tool}
+              </span>
             ))}
           </div>
-        </section>
+        </GlassCard>
 
-        <nav className="paper-shell process-pagination" aria-label="Procesos">
-          {previous ? (
-            <Link href={`/procesos/${previous.slug}`}>
-              <span>← Anterior</span>
-              <strong>{previous.title}</strong>
-            </Link>
-          ) : (
-            <span />
-          )}
-          {next ? (
-            <Link href={`/procesos/${next.slug}`}>
-              <span>Siguiente →</span>
-              <strong>{next.title}</strong>
-            </Link>
-          ) : (
-            <span />
-          )}
-        </nav>
-      </main>
-      <SiteFooter />
-    </>
+        <GlassCard icon="niebla" title="Esquema" className="span-2">
+          <pre className="decision-schema">{process.schema}</pre>
+        </GlassCard>
+
+        <GlassCard icon="flecha" title="Más procesos" className="span-2">
+          <div className="process-pager">
+            {previous ? (
+              <Link href={`/procesos/${previous.slug}`}>← {previous.title}</Link>
+            ) : (
+              <span />
+            )}
+            {next ? <Link href={`/procesos/${next.slug}`}>{next.title} →</Link> : <span />}
+          </div>
+        </GlassCard>
+      </div>
+    </main>
   );
 }
