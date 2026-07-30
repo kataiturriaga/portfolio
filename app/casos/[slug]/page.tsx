@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import SiteFooter from "@/components/site/SiteFooter";
-import SiteHeader from "@/components/site/SiteHeader";
-import CaseStudyView from "@/components/casos/CaseStudyView";
+import CaseCity from "@/components/weather/caso/CaseCity";
 import { casos, getCaso } from "@/data/casos";
 
 type CasoPageProps = { params: Promise<{ slug: string }> };
@@ -17,7 +15,10 @@ export async function generateMetadata({
   const { slug } = await params;
   const caso = getCaso(slug);
   if (!caso) return {};
-  return { title: `${caso.title} — El Diario de Kata`, description: caso.thesis };
+  return {
+    title: `${caso.title} — Kata Iturriaga`,
+    description: caso.thesis,
+  };
 }
 
 export default async function CasoDetailPage({ params }: CasoPageProps) {
@@ -25,13 +26,5 @@ export default async function CasoDetailPage({ params }: CasoPageProps) {
   const caso = getCaso(slug);
   if (!caso) notFound();
 
-  return (
-    <>
-      <SiteHeader />
-      <main id="contenido" className="case-detail">
-        <CaseStudyView caso={caso} />
-      </main>
-      <SiteFooter />
-    </>
-  );
+  return <CaseCity caso={caso} />;
 }
