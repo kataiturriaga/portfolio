@@ -726,3 +726,69 @@ a.forecast-row:hover {
 .decision-compare figure {
   margin: 0;
 }
+
+/* ---- Lista de ciudades ---- */
+.city-list {
+  position: relative;
+}
+
+.city-list::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.city-list__title {
+  margin: 0 0 1.4rem;
+  font-size: clamp(2.2rem, 6vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.city-list__card {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 1.2rem;
+  margin-bottom: 0.9rem;
+  transition: background 180ms ease;
+}
+
+.city-list__card:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.city-list__card.is-static:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.city-list__card strong {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.city-list__card p {
+  margin: 0.15rem 0 0.3rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.city-list__card small {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.city-list__side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.city-list__side span {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+}

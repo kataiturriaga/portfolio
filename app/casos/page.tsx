@@ -1,44 +1,45 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import SiteFooter from "@/components/site/SiteFooter";
-import SiteHeader from "@/components/site/SiteHeader";
-import { casos } from "@/data/casos";
+import WeatherIcon from "@/components/weather/WeatherIcon";
+import { projects } from "@/data/home";
+import { projectWeather } from "@/data/weather";
 
 export const metadata: Metadata = {
-  title: "Casos — El Diario de Kata",
-  description:
-    "Case studies de producto: decisiones de diseño con contexto, tensión y criterio.",
+  title: "Casos — Kata Iturriaga",
+  description: "Todos los proyectos y casos de estudio, como una lista de ciudades.",
 };
 
 export default function CasosPage() {
   return (
-    <>
-      <SiteHeader />
-      <main id="contenido" className="casos-index">
-        <section className="paper-shell casos-index__hero">
-          <p className="eyebrow">✶ Portada de casos</p>
-          <h1>Casos</h1>
-          <p className="casos-index__deck">
-            Historias de producto contadas por sus decisiones: de dónde veníamos,
-            qué elegimos y por qué.
-          </p>
-        </section>
-        <section className="paper-shell casos-index__grid">
-          {casos.map((caso) => (
-            <Link
-              key={caso.slug}
-              href={`/casos/${caso.slug}`}
-              className="casos-index__card"
-            >
-              <p className="eyebrow">{caso.kicker}</p>
-              <h2>{caso.title}</h2>
-              <p>{caso.thesis}</p>
-              <span aria-hidden="true">Leer el caso ↗</span>
-            </Link>
-          ))}
-        </section>
-      </main>
-      <SiteFooter />
-    </>
+    <main className="weather-shell city-list">
+      <h1 className="city-list__title">Casos</h1>
+      {projects.map((project) => {
+        const weather = projectWeather[project.client];
+        const card = (
+          <>
+            <div>
+              <strong>{project.client}</strong>
+              <p>{project.title}</p>
+              <small>
+                {project.domain} · {project.role}
+              </small>
+            </div>
+            <div className="city-list__side">
+              <WeatherIcon name={weather?.icon ?? "sol"} size={26} />
+              <span>{project.year}</span>
+            </div>
+          </>
+        );
+        return project.href ? (
+          <Link key={project.number} href={project.href} className="glass-card city-list__card">
+            {card}
+          </Link>
+        ) : (
+          <div key={project.number} className="glass-card city-list__card is-static">
+            {card}
+          </div>
+        );
+      })}
+    </main>
   );
 }
