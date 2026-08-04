@@ -62,11 +62,14 @@ function DecisionCard({ decision }: { decision: Decision }) {
 }
 
 export default function CaseCity({ caso }: { caso: CaseStudy }) {
+  // El nombre de ciudad es la marca, no la descripción completa del producto
+  const cityName = caso.glance.product.split("—")[0].trim();
+
   return (
     <main className="weather-shell">
       <CityHeader
         over={caso.kicker}
-        name={caso.glance.product}
+        name={cityName}
         big={caso.heroTitle}
         condition={caso.heroSubtitle}
         hiLo={`${caso.glance.period} · ${caso.glance.role}`}

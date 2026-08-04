@@ -43,7 +43,7 @@ export default function CityHeader({
         <strong>{name}</strong>
         <span>
           {big}
-          {unit} · {condition}
+          {unit ? ` ${unit}` : ""} · {condition}
         </span>
       </motion.div>
     </>

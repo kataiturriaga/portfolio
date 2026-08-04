@@ -216,8 +216,10 @@
 }
 
 .city-header__big sup {
-  margin-top: 0.6rem;
-  font-size: 0.35em;
+  position: static;
+  top: auto;
+  margin-top: 0.9rem;
+  font-size: 0.32em;
   font-weight: 300;
 }
 
@@ -233,16 +235,19 @@
   color: rgba(255, 255, 255, 0.8);
 }
 
+/* Se extiende por detrás de los controles del cielo (z-index menor) para que
+   ambos lean como una única barra de navegación translúcida. */
 .city-compact {
   position: fixed;
-  top: 3.6rem;
+  top: 0;
   left: 0;
   right: 0;
-  z-index: 30;
+  z-index: 25;
   display: flex;
+  align-items: flex-end;
   justify-content: center;
   gap: 0.7rem;
-  padding: 0.55rem 1rem;
+  padding: 3.9rem 1rem 0.55rem;
   background: rgba(15, 20, 40, 0.4);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -255,6 +260,28 @@
 .city-compact span {
   color: rgba(255, 255, 255, 0.75);
   font-weight: 400;
+}
+
+.city-compact strong,
+.city-compact span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.city-compact strong {
+  max-width: 45%;
+}
+
+.city-compact span {
+  max-width: 45%;
+}
+
+/* Bajo 640px los dos segmented controls se apilan en dos filas. */
+@media (max-width: 639px) {
+  .city-compact {
+    padding-top: 6.6rem;
+  }
 }
 
 /* ---- Tarjetas glass ---- */
@@ -432,10 +459,16 @@ a.forecast-row:hover {
   font-weight: 600;
 }
 
+/* El reset de Tailwind quita los marcadores; aquí sí los queremos. */
 .hour-detail ul {
   margin: 0;
   padding-left: 1.1rem;
   color: rgba(255, 255, 255, 0.82);
+  list-style: disc;
+}
+
+.hour-detail li::marker {
+  color: rgba(255, 255, 255, 0.45);
 }
 
 .hour-detail li {
@@ -672,10 +705,15 @@ a.forecast-row:hover {
   padding-left: 1.15rem;
   color: rgba(255, 255, 255, 0.88);
   line-height: 1.6;
+  list-style: disc;
 }
 
 .decision-list li {
   margin: 0.3rem 0;
+}
+
+.decision-list li::marker {
+  color: rgba(255, 255, 255, 0.45);
 }
 
 .decision-alt summary {
@@ -698,10 +736,20 @@ a.forecast-row:hover {
 .decision-media img,
 .decision-compare img,
 .decision-compare video {
+  display: block;
   width: 100%;
-  height: auto;
+  max-height: 460px;
+  object-fit: contain;
   border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* Reserva altura: algunos vídeos de iPhone (HEVC) no reportan dimensiones
+   en navegadores que no los decodifican y colapsarían la caja. */
+.decision-compare video {
+  aspect-ratio: 9 / 16;
+  height: 460px;
 }
 
 .decision-media figcaption,
@@ -808,12 +856,18 @@ a.forecast-row:hover {
 
 .process-steps-list {
   margin: 0;
-  padding-left: 1.4rem;
+  padding-left: 1.6rem;
   line-height: 1.7;
+  list-style: decimal;
 }
 
 .process-steps-list li {
   margin: 0.45rem 0;
+}
+
+.process-steps-list li::marker {
+  color: rgba(255, 255, 255, 0.5);
+  font-variant-numeric: tabular-nums;
 }
 
 .process-pager {
@@ -821,4 +875,9 @@ a.forecast-row:hover {
   justify-content: space-between;
   gap: 1rem;
   font-weight: 600;
+}
+
+/* El número de proceso ("1.6") no necesita la columna ancha de un cliente. */
+.forecast-row--process {
+  grid-template-columns: 42px 24px 1fr auto;
 }

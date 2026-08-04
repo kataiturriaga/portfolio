@@ -37,7 +37,7 @@ export default function ProcesosPage() {
                   <Link
                     key={process.slug}
                     href={`/procesos/${process.slug}`}
-                    className="forecast-row"
+                    className="forecast-row forecast-row--process"
                   >
                     <span className="forecast-row__client">{process.number}</span>
                     <WeatherIcon name={status.icon} size={20} />
