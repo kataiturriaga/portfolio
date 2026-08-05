@@ -10,7 +10,7 @@ export default function BottomBar() {
   const routes = cityRoutes();
 
   return (
-    <nav className="bottom-bar" aria-label="Navegación principal">
+    <nav className="bottom-bar" aria-label="Navegación principal" data-sky-ledge>
       <Link href="/procesos" aria-label="Procesos" title="Procesos">
         <WeatherIcon name="mapa" size={20} />
       </Link>

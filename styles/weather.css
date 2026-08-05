@@ -62,6 +62,26 @@
   }
 }
 
+.sky__gl {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.sky__fx {
+  position: absolute;
+  inset: 0;
+}
+
+.sky__fx-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Fallback de nubes CSS cuando WebGL no está disponible */
 .sky__cloud {
   position: absolute;
   border-radius: 50%;
@@ -79,49 +99,9 @@
   }
 }
 
-.sky__precip {
-  position: absolute;
-  inset: 0;
-}
-
-.sky__drop {
-  position: absolute;
-  top: -30px;
-  width: 1.5px;
-  height: 22px;
-  background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5));
-  animation: drop-fall linear infinite;
-}
-
-@keyframes drop-fall {
-  to {
-    transform: translateY(110vh);
-  }
-}
-
-.sky__flake {
-  position: absolute;
-  top: -12px;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #fff;
-  animation: flake-fall linear infinite;
-}
-
-@keyframes flake-fall {
-  50% {
-    margin-left: 18px;
-  }
-  to {
-    transform: translateY(110vh);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .sky__stars,
-  .sky__cloud,
-  .sky__precip {
+  .sky__cloud {
     display: none;
   }
 }

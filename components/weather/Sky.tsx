@@ -1,8 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { skyGradients } from "@/data/weather";
 import { useSky } from "./SkyProvider";
+import SkyShader from "./SkyShader";
+import Precipitation from "./Precipitation";
 
 const rand = (i: number, salt: number) =>
   (((i + 1) * 9301 + (salt + 1) * 49297) % 233280) / 233280;
@@ -10,7 +13,10 @@ const rand = (i: number, salt: number) =>
 export default function Sky() {
   const { moment, condition } = useSky();
   const reduced = useReducedMotion();
+  const [shaderOk, setShaderOk] = useState(true);
   const key = `${moment}-${condition}`;
+  const precip =
+    condition === "lluvia" || condition === "nieve" ? condition : null;
 
   return (
     <div className="sky" aria-hidden="true">
@@ -42,57 +48,46 @@ export default function Sky() {
         </div>
       )}
 
-      {!reduced && condition !== "despejado" && (
-        <>
-          {Array.from({ length: 5 }, (_, i) => (
-            <span
-              key={i}
-              className="sky__cloud"
-              style={{
-                left: `${-20 + rand(i, 5) * 110}%`,
-                top: `${rand(i, 6) * 45}%`,
-                width: `${220 + rand(i, 7) * 280}px`,
-                height: `${70 + rand(i, 8) * 60}px`,
-                animationDuration: `${70 + rand(i, 9) * 60}s`,
-                animationDelay: `${-rand(i, 10) * 70}s`,
-              }}
-            />
-          ))}
-        </>
+      {shaderOk ? (
+        <SkyShader
+          moment={moment}
+          condition={condition}
+          frozen={!!reduced}
+          onUnavailable={() => setShaderOk(false)}
+        />
+      ) : (
+        condition !== "despejado" &&
+        Array.from({ length: 5 }, (_, i) => (
+          <span
+            key={i}
+            className="sky__cloud"
+            style={{
+              left: `${-20 + rand(i, 5) * 110}%`,
+              top: `${rand(i, 6) * 45}%`,
+              width: `${220 + rand(i, 7) * 280}px`,
+              height: `${70 + rand(i, 8) * 60}px`,
+              animationDuration: `${70 + rand(i, 9) * 60}s`,
+              animationDelay: `${-rand(i, 10) * 70}s`,
+            }}
+          />
+        ))
       )}
 
-      {!reduced && condition === "lluvia" && (
-        <div className="sky__precip">
-          {Array.from({ length: 60 }, (_, i) => (
-            <span
-              key={i}
-              className="sky__drop"
-              style={{
-                left: `${rand(i, 11) * 100}%`,
-                animationDuration: `${0.7 + rand(i, 12) * 0.6}s`,
-                animationDelay: `${-rand(i, 13) * 2}s`,
-              }}
-            />
-          ))}
-        </div>
-      )}
-
-      {!reduced && condition === "nieve" && (
-        <div className="sky__precip">
-          {Array.from({ length: 45 }, (_, i) => (
-            <span
-              key={i}
-              className="sky__flake"
-              style={{
-                left: `${rand(i, 14) * 100}%`,
-                animationDuration: `${5 + rand(i, 15) * 6}s`,
-                animationDelay: `${-rand(i, 16) * 10}s`,
-                opacity: 0.4 + rand(i, 17) * 0.5,
-              }}
-            />
-          ))}
-        </div>
-      )}
+      <AnimatePresence initial={false}>
+        {precip && (
+          <motion.div
+            key={precip}
+            className="sky__fx"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.7, ease: "easeInOut" }}
+          >
+            {/* Con movimiento reducido: versión ligera (menos gotas, más lentas) */}
+            <Precipitation condition={precip} light={!!reduced} />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

@@ -12,7 +12,7 @@ export default function GlassCard({
   children: React.ReactNode;
 }) {
   return (
-    <section className={`glass-card ${className}`.trim()}>
+    <section className={`glass-card ${className}`.trim()} data-sky-ledge>
       {title ? (
         <header className="glass-card__head">
           {icon ? <WeatherIcon name={icon} size={13} /> : null}
