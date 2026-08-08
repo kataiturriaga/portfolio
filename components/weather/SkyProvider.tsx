@@ -18,7 +18,9 @@ type SkyState = SkyValue & {
 };
 
 const SkyContext = createContext<SkyState | null>(null);
-const STORAGE_KEY = "kata-sky-v2";
+// v3: al cambiar el cielo por defecto se invalidan las elecciones guardadas
+// con la clave anterior, para que todo el mundo vea el nuevo arranque.
+const STORAGE_KEY = "kata-sky-v3";
 
 const DEFAULT_SKY: SkyValue = { moment: "noche", condition: "nubes" };
 

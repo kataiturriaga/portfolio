@@ -75,7 +75,7 @@ export const casos: CaseStudy[] = [
       "La v2 le dio profundidad a cada flujo: más experiencias de entreno, una dieta con capas, los pasos convertidos en juego y una puerta de entrada sin fricción.",
     glance: {
       role: "Product Designer + PM",
-      period: "Abril a julio de 2026",
+      period: "03/26 - ahora",
       team: "2 personas (diseño/PM + desarrollo)",
       product: "El Método — tier coached (asesorías personalizadas)",
       problem:

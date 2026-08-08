@@ -10,7 +10,7 @@ export default function CityHeader({
   name: string;
   big: string;
   unit?: string;
-  condition: string;
+  condition?: string;
   /** Línea máx/mín: texto suelto o varias métricas ya maquetadas */
   hiLo?: React.ReactNode;
 }) {
@@ -22,7 +22,7 @@ export default function CityHeader({
         {big}
         {unit ? <sup>{unit}</sup> : null}
       </p>
-      <p className="city-header__condition">{condition}</p>
+      {condition ? <p className="city-header__condition">{condition}</p> : null}
       {hiLo ? <p className="city-header__hilo">{hiLo}</p> : null}
     </header>
   );

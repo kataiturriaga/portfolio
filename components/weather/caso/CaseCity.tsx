@@ -68,11 +68,14 @@ export default function CaseCity({ caso }: { caso: CaseStudy }) {
   return (
     <main className="weather-shell">
       <CityHeader
-        over={caso.kicker}
         name={cityName}
         big={caso.heroTitle}
-        condition={caso.heroSubtitle}
-        hiLo={`${caso.glance.period} · ${caso.glance.role}`}
+        hiLo={
+          <>
+            <span>{caso.glance.period}</span>
+            <span>{caso.glance.role}</span>
+          </>
+        }
       />
 
       <div className="card-stack">
