@@ -73,9 +73,20 @@ export default function Precipitation({
       collectLedges();
     };
     resize();
+
+    // Leer los rects es costoso (fuerza reflow), así que en vez de hacerlo en
+    // cada evento de scroll se marca el estado como sucio y se relee una sola
+    // vez por frame, justo antes de dibujar.
+    let ledgesDirty = false;
+    const markDirty = () => {
+      ledgesDirty = true;
+    };
     window.addEventListener("resize", resize);
-    window.addEventListener("scroll", collectLedges, { passive: true });
-    const ledgePoll = window.setInterval(collectLedges, 400);
+    window.addEventListener("scroll", markDirty, { passive: true });
+    // Cubre lo que el scroll no ve: cambio de ruta, imágenes que cargan,
+    // <details> que se despliega... todo lo que mueva las cards.
+    const ro = new ResizeObserver(markDirty);
+    ro.observe(document.body);
 
     /** Primera superficie que la partícula encontraría cayendo desde y. */
     const landingBelow = (x: number, y: number): number => {
@@ -136,6 +147,10 @@ export default function Precipitation({
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
       t += dt;
+      if (ledgesDirty) {
+        collectLedges();
+        ledgesDirty = false;
+      }
       ctx.clearRect(0, 0, w, h);
 
       if (isRain) {
@@ -255,9 +270,9 @@ export default function Precipitation({
 
     return () => {
       cancelAnimationFrame(raf);
-      window.clearInterval(ledgePoll);
+      ro.disconnect();
       window.removeEventListener("resize", resize);
-      window.removeEventListener("scroll", collectLedges);
+      window.removeEventListener("scroll", markDirty);
     };
   }, [condition, light]);
 
