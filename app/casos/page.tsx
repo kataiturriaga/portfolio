@@ -26,7 +26,9 @@ export default function CasosPage() {
             </div>
             <div className="city-list__side">
               <WeatherIcon name={weather?.icon ?? "sol"} size={26} />
-              <span>{project.year}</span>
+              <span>
+                {project.status} · {project.year}
+              </span>
             </div>
           </>
         );

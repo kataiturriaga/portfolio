@@ -1,7 +1,3 @@
-"use client";
-
-import { motion, useScroll, useTransform } from "framer-motion";
-
 export default function CityHeader({
   over,
   name,
@@ -15,37 +11,19 @@ export default function CityHeader({
   big: string;
   unit?: string;
   condition: string;
-  hiLo?: string;
+  /** Línea máx/mín: texto suelto o varias métricas ya maquetadas */
+  hiLo?: React.ReactNode;
 }) {
-  const { scrollY } = useScroll();
-  const bigOpacity = useTransform(scrollY, [40, 240], [1, 0]);
-  const compactOpacity = useTransform(scrollY, [200, 280], [0, 1]);
-
   return (
-    <>
-      <header className="city-header">
-        {over ? <p className="city-header__over">{over}</p> : null}
-        <h1 className="city-header__name">{name}</h1>
-        <motion.p className="city-header__big" style={{ opacity: bigOpacity }}>
-          {big}
-          {unit ? <sup>{unit}</sup> : null}
-        </motion.p>
-        <motion.p className="city-header__condition" style={{ opacity: bigOpacity }}>
-          {condition}
-        </motion.p>
-        {hiLo ? (
-          <motion.p className="city-header__hilo" style={{ opacity: bigOpacity }}>
-            {hiLo}
-          </motion.p>
-        ) : null}
-      </header>
-      <motion.div className="city-compact" style={{ opacity: compactOpacity }}>
-        <strong>{name}</strong>
-        <span>
-          {big}
-          {unit ? ` ${unit}` : ""} · {condition}
-        </span>
-      </motion.div>
-    </>
+    <header className="city-header">
+      {over ? <p className="city-header__over">{over}</p> : null}
+      <h1 className="city-header__name">{name}</h1>
+      <p className="city-header__big">
+        {big}
+        {unit ? <sup>{unit}</sup> : null}
+      </p>
+      <p className="city-header__condition">{condition}</p>
+      {hiLo ? <p className="city-header__hilo">{hiLo}</p> : null}
+    </header>
   );
 }

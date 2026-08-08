@@ -11,7 +11,12 @@ export type Project = {
   number: string;
   client: string;
   title: string;
+  /** Versión breve para la fila de previsión */
+  shortTitle: string;
   year: string;
+  status: string;
+  /** Franja de "temperatura" (0-1) dentro del rango de la condición actual */
+  tempBand: [number, number];
   domain: string;
   role: string;
   tone: string;
@@ -25,7 +30,10 @@ export const projects: Project[] = [
     number: "01",
     client: "El Método",
     title: "Añadiendo capas: la app coached de la v1 a la v2",
-    year: "LANZADO · 2026",
+    shortTitle: "Añadiendo capas",
+    year: "2026",
+    status: "Lanzado",
+    tempBand: [0.55, 0.92],
     domain: "Salud y fitness",
     role: "Product Designer + PM",
     tone: "cobalt",
@@ -37,7 +45,10 @@ export const projects: Project[] = [
     number: "02",
     client: "Archivo Sur",
     title: "Una nueva forma de leer lo que importa",
-    year: "LANZADO · 2025",
+    shortTitle: "Leer lo que importa",
+    year: "2025",
+    status: "Lanzado",
+    tempBand: [0.42, 0.78],
     domain: "Media-tech",
     role: "Diseño principal",
     tone: "coral",
@@ -46,7 +57,10 @@ export const projects: Project[] = [
     number: "03",
     client: "Nexo",
     title: "Crédito pensado para la vida real",
-    year: "CONCEPTO · 2025",
+    shortTitle: "Crédito para la vida real",
+    year: "2025",
+    status: "Concepto",
+    tempBand: [0.30, 0.58],
     domain: "FinTech",
     role: "Investigación + UX",
     tone: "lime",
@@ -55,7 +69,10 @@ export const projects: Project[] = [
     number: "04",
     client: "Cancha",
     title: "El deporte local cruza fronteras",
-    year: "LANZADO · 2024",
+    shortTitle: "Deporte local sin fronteras",
+    year: "2024",
+    status: "Lanzado",
+    tempBand: [0.48, 0.85],
     domain: "Streaming",
     role: "Diseño de experiencia",
     tone: "violet",
@@ -64,7 +81,10 @@ export const projects: Project[] = [
     number: "05",
     client: "Común",
     title: "Participar también puede ser sencillo",
-    year: "LANZADO · 2024",
+    shortTitle: "Participar sin fricción",
+    year: "2024",
+    status: "Lanzado",
+    tempBand: [0.22, 0.52],
     domain: "Civic tech",
     role: "Diseño 0 → 1",
     tone: "amber",
@@ -73,7 +93,10 @@ export const projects: Project[] = [
     number: "06",
     client: "Taller 33",
     title: "Un sistema para crear sin empezar de cero",
-    year: "SISTEMA · 2023",
+    shortTitle: "Crear sin empezar de cero",
+    year: "2023",
+    status: "Sistema",
+    tempBand: [0.12, 0.40],
     domain: "Design systems",
     role: "Estrategia + UI",
     tone: "ink",
@@ -100,7 +123,15 @@ export const timeline = [
       "Sistemas de diseño que conectan marca, producto y código",
       "Colaboración directa con fundadores y equipos de ingeniería",
     ],
-    tags: ["Producto", "Estrategia"],
+    tags: [
+      "Producto",
+      "Estrategia",
+      "Design systems",
+      "Prototipado",
+      "Research",
+      "Front-end",
+      "Facilitación",
+    ],
   },
   {
     period: "2023 — 2025",
@@ -112,7 +143,15 @@ export const timeline = [
       "Investigación continua y prototipos de alta fidelidad",
       "Mentoría y evolución del sistema de diseño",
     ],
-    tags: ["B2B SaaS", "Design systems"],
+    tags: [
+      "B2B SaaS",
+      "Design systems",
+      "Research",
+      "Prototipado",
+      "Mentoría",
+      "Workshops",
+      "Handoff",
+    ],
   },
   {
     period: "2021 — 2023",
@@ -124,7 +163,15 @@ export const timeline = [
       "Trabajo de punta a punta junto a equipos multidisciplinares",
       "Entrega de productos para web, iOS y Android",
     ],
-    tags: ["UX research", "Mobile"],
+    tags: [
+      "UX research",
+      "Mobile",
+      "iOS",
+      "Android",
+      "Wireframing",
+      "Testing",
+      "Accesibilidad",
+    ],
   },
   {
     period: "2017 — 2021",
@@ -134,8 +181,17 @@ export const timeline = [
     bullets: [
       "Fundamentos visuales, interacción y pensamiento sistémico",
       "Proyecto final sobre acceso inclusivo a servicios digitales",
+      "Primeros encargos reales en paralelo a la carrera",
     ],
-    tags: ["Diseño", "Tecnología"],
+    tags: [
+      "Fundamentos",
+      "Interacción",
+      "Tipografía",
+      "Identidad",
+      "Motion",
+      "Sistemas",
+      "Proyecto final",
+    ],
   },
 ];
 
@@ -150,16 +206,17 @@ export const articles = featuredProcesses.map((process) => ({
 
 export const copy = {
   header: {
-    over: "Barcelona · ESP",
-    name: "Kata Iturriaga",
-    big: "4+",
-    unit: "años",
-    condition: "Product Designer",
-    hiLo: "Máx: 12 proyectos · 18 marcas",
+    name: "Kata",
+    big: "iturriaga",
+    condition: "Portfolio",
+    metrics: [
+      { label: "Años", value: "3,8" },
+      { label: "Ideas", value: "4,7K" },
+    ],
   },
   intro:
     "Diseño productos digitales desde la primera pregunta hasta el último detalle, conectando investigación, estrategia, interfaz y código.",
-  trajectory: { title: "Previsión por horas · Trayectoria" },
+  trajectory: { title: "Trayectoria" },
   work: {
     title: "Previsión a 6 proyectos",
     intro: "Una selección de productos lanzados y conceptos de los últimos años.",

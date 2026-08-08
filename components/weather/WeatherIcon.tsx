@@ -6,6 +6,13 @@ export type WeatherIconName =
   | "lluvia"
   | "nieve"
   | "niebla"
+  | "luna-nube"
+  | "luna-lluvia"
+  | "luna-nieve"
+  | "nube-amanecer"
+  | "sol-lluvia"
+  | "sol-nieve"
+  | "atardecer"
   | "viento"
   | "brujula"
   | "mapa"
@@ -19,35 +26,146 @@ export type WeatherIconName =
   | "calendario"
   | "flecha";
 
+/* Paleta del set meteorológico, en el lenguaje de la app del Tiempo:
+   formas rellenas y multicolor sobre iconos de interfaz monocromos. */
+const SUN = "#ffcc00";
+const SUN_DEEP = "#ff9f0a";
+const CLOUD = "#f2f4f8";
+const CLOUD_DIM = "#c9d2de";
+const RAIN = "#5ac8fa";
+const MOON = "#f4f6fb";
+
+/** Nube sólida reutilizada por todas las variantes nubladas. */
+const cloudPath = (d: string, fill: string) => <path d={d} fill={fill} stroke="none" />;
+const CLOUD_D =
+  "M7.4 18.4h9.1a3.9 3.9 0 0 0 .5-7.77 5.6 5.6 0 0 0-10.6-1.2A3.6 3.6 0 0 0 7.4 18.4Z";
+const CLOUD_SMALL_D =
+  "M6.2 19.2h7.9a3.4 3.4 0 0 0 .4-6.75 4.85 4.85 0 0 0-9.2-1.05A3.12 3.12 0 0 0 6.2 19.2Z";
+/* Igual pero más arriba, para dejar sitio a la precipitación debajo */
+const CLOUD_SMALL_RAIN_D =
+  "M6.2 16.1h7.9a3.4 3.4 0 0 0 .4-6.75 4.85 4.85 0 0 0-9.2-1.05A3.12 3.12 0 0 0 6.2 16.1Z";
+
+/** Astro pequeño que asoma tras la nube, y precipitación bajo ella. */
+const MOON_SMALL = (
+  <path
+    d="M19.9 9.1a3.5 3.5 0 1 1-4.3-4.8 2.85 2.85 0 0 0 4.3 4.8Z"
+    fill={MOON}
+    stroke="none"
+  />
+);
+
+const SUN_SMALL = (
+  <>
+    <circle cx="16.8" cy="6.6" r="2.9" fill={SUN} stroke="none" />
+    <path
+      d="M16.8 1.4v1.4M22 6.6h-1.4M20.5 2.9l-1 1M20.5 10.3l-1-1"
+      stroke={SUN}
+      strokeWidth="1.7"
+      strokeLinecap="round"
+    />
+  </>
+);
+
+const RAIN_DROPS = (
+  <path
+    d="M7.9 18.1 7.1 20.6M11.4 18.1l-.8 2.5M14.9 18.1l-.8 2.5"
+    stroke={RAIN}
+    strokeWidth="1.8"
+    strokeLinecap="round"
+  />
+);
+
+const SNOW_DOTS = (
+  <path
+    d="M7.9 18.6h.01M11.4 20.3h.01M14.9 18.6h.01"
+    stroke={RAIN}
+    strokeWidth="2.5"
+    strokeLinecap="round"
+  />
+);
+
 const PATHS: Record<WeatherIconName, React.ReactNode> = {
   sol: (
     <>
-      <circle cx="12" cy="12" r="4.2" />
-      <path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5 5l1.7 1.7M17.3 17.3 19 19M19 5l-1.7 1.7M6.7 17.3 5 19" />
+      <circle cx="12" cy="12" r="4.6" fill={SUN} stroke="none" />
+      <path
+        d="M12 2.2v2.6M12 19.2v2.6M2.2 12h2.6M19.2 12h2.6M4.9 4.9l1.85 1.85M17.25 17.25 19.1 19.1M19.1 4.9l-1.85 1.85M6.75 17.25 4.9 19.1"
+        stroke={SUN}
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
     </>
   ),
-  luna: <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z" />,
-  nube: <path d="M7 18h9a4 4 0 0 0 .8-7.9A5.5 5.5 0 0 0 6.2 12 3.5 3.5 0 0 0 7 18Z" />,
+  luna: (
+    <>
+      <path
+        d="M20.2 14.9A8.6 8.6 0 0 1 9.1 3.8a8.6 8.6 0 1 0 11.1 11.1Z"
+        fill={MOON}
+        stroke="none"
+      />
+      <path
+        d="M17.4 3.2l.55 1.5 1.5.55-1.5.55-.55 1.5-.55-1.5-1.5-.55 1.5-.55Z"
+        fill={MOON}
+        stroke="none"
+        opacity="0.85"
+      />
+    </>
+  ),
+  nube: cloudPath(CLOUD_D, CLOUD),
   "nube-sol": (
     <>
-      <circle cx="16.5" cy="7.5" r="2.6" />
-      <path d="M16.5 2.8v1M21.2 7.5h-1M19.8 4.2l-.7.7M19.8 10.8l-.7-.7" />
-      <path d="M5.5 19h7.5a3.4 3.4 0 0 0 .7-6.7A4.7 4.7 0 0 0 4.8 14 3 3 0 0 0 5.5 19Z" />
+      <circle cx="16.8" cy="7.2" r="3" fill={SUN} stroke="none" />
+      <path
+        d="M16.8 1.9v1.5M22.1 7.2h-1.5M20.55 3.45l-1.05 1.05M20.55 10.95l-1.05-1.05"
+        stroke={SUN}
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      {cloudPath(CLOUD_SMALL_D, CLOUD)}
     </>
   ),
   lluvia: (
     <>
-      <path d="M7 15h9a4 4 0 0 0 .8-7.9A5.5 5.5 0 0 0 6.2 9 3.5 3.5 0 0 0 7 15Z" />
-      <path d="M8.5 17.5 7.5 20M12.5 17.5l-1 2.5M16.5 17.5l-1 2.5" />
+      {cloudPath(
+        "M7.4 15.6h9.1a3.9 3.9 0 0 0 .5-7.77 5.6 5.6 0 0 0-10.6-1.2A3.6 3.6 0 0 0 7.4 15.6Z",
+        CLOUD,
+      )}
+      <path
+        d="M8.8 17.6 7.9 20.4M12.4 17.6l-.9 2.8M16 17.6l-.9 2.8"
+        stroke={RAIN}
+        strokeWidth="1.9"
+        strokeLinecap="round"
+      />
     </>
   ),
   nieve: (
     <>
-      <path d="M7 14.5h9a4 4 0 0 0 .8-7.9A5.5 5.5 0 0 0 6.2 8.5 3.5 3.5 0 0 0 7 14.5Z" />
-      <path d="M8.5 17.4h.01M12 19.4h.01M15.5 17.4h.01" strokeWidth="2.4" strokeLinecap="round" />
+      {cloudPath(
+        "M7.4 15.1h9.1a3.9 3.9 0 0 0 .5-7.77 5.6 5.6 0 0 0-10.6-1.2A3.6 3.6 0 0 0 7.4 15.1Z",
+        CLOUD,
+      )}
+      <path
+        d="M8.7 18.2h.01M12 20.1h.01M15.3 18.2h.01"
+        stroke={RAIN}
+        strokeWidth="2.6"
+        strokeLinecap="round"
+      />
     </>
   ),
-  niebla: <path d="M4 10h16M4 13.5h16M6.5 17h11" />,
+  niebla: (
+    <>
+      {cloudPath(
+        "M7.4 13.2h9.1a3.9 3.9 0 0 0 .5-7.77 5.6 5.6 0 0 0-10.6-1.2A3.6 3.6 0 0 0 7.4 13.2Z",
+        CLOUD,
+      )}
+      <path
+        d="M5.2 16.6h13.6M7 20h10.4"
+        stroke={CLOUD_DIM}
+        strokeWidth="1.9"
+        strokeLinecap="round"
+      />
+    </>
+  ),
   viento: <path d="M3.5 9h10a2.6 2.6 0 1 0-2.4-3.6M3.5 13h14.5a2.6 2.6 0 1 1-2.4 3.6M3.5 17H10" />,
   brujula: (
     <>
@@ -66,8 +184,80 @@ const PATHS: Record<WeatherIconName, React.ReactNode> = {
   ubicacion: <path d="M20.5 3.5 3.8 10.2l7 2.6 2.6 7Z" />,
   amanecer: (
     <>
-      <path d="M12 10.2a4 4 0 0 1 4 4M4 14.2h2.2M17.8 14.2H20M6.6 9l1.6 1.5M17.4 9l-1.6 1.5M12 5.6v2.2" />
-      <path d="M3.5 18h17" />
+      <path d="M7.6 15.4a4.4 4.4 0 0 1 8.8 0Z" fill={SUN} stroke="none" />
+      <path
+        d="M12 4.6v2.4M3.9 15.4h2.2M17.9 15.4h2.2M6.1 9.5l1.7 1.7M17.9 9.5l-1.7 1.7"
+        stroke={SUN}
+        strokeWidth="1.9"
+        strokeLinecap="round"
+      />
+      <path d="M3 18.8h18" stroke={SUN_DEEP} strokeWidth="2" strokeLinecap="round" />
+    </>
+  ),
+  atardecer: (
+    <>
+      <path d="M7.6 15.4a4.4 4.4 0 0 1 8.8 0Z" fill={SUN_DEEP} stroke="none" />
+      <path
+        d="M3.9 15.4h2.2M17.9 15.4h2.2M6.1 9.5l1.7 1.7M17.9 9.5l-1.7 1.7"
+        stroke={SUN_DEEP}
+        strokeWidth="1.9"
+        strokeLinecap="round"
+      />
+      {/* flecha hacia abajo: el sol se pone */}
+      <path
+        d="M12 7.4v-2.8M12 7.4 10.4 5.8M12 7.4l1.6-1.6"
+        stroke={SUN_DEEP}
+        strokeWidth="1.9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M3 18.8h18" stroke={SUN_DEEP} strokeWidth="2" strokeLinecap="round" />
+    </>
+  ),
+  "luna-nube": (
+    <>
+      {MOON_SMALL}
+      {cloudPath(CLOUD_SMALL_D, CLOUD)}
+    </>
+  ),
+  "luna-lluvia": (
+    <>
+      {MOON_SMALL}
+      {cloudPath(CLOUD_SMALL_RAIN_D, CLOUD)}
+      {RAIN_DROPS}
+    </>
+  ),
+  "luna-nieve": (
+    <>
+      {MOON_SMALL}
+      {cloudPath(CLOUD_SMALL_RAIN_D, CLOUD)}
+      {SNOW_DOTS}
+    </>
+  ),
+  "nube-amanecer": (
+    <>
+      <path d="M13.4 9.9a3.4 3.4 0 0 1 6.8 0Z" fill={SUN} stroke="none" />
+      <path
+        d="M16.8 3.1v1.5M11.9 9.9h1.4M20.3 9.9h1.4M13.9 5.6l1 1"
+        stroke={SUN}
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
+      {cloudPath(CLOUD_SMALL_D, CLOUD)}
+    </>
+  ),
+  "sol-lluvia": (
+    <>
+      {SUN_SMALL}
+      {cloudPath(CLOUD_SMALL_RAIN_D, CLOUD)}
+      {RAIN_DROPS}
+    </>
+  ),
+  "sol-nieve": (
+    <>
+      {SUN_SMALL}
+      {cloudPath(CLOUD_SMALL_RAIN_D, CLOUD)}
+      {SNOW_DOTS}
     </>
   ),
   termometro: <path d="M10.5 13.8V5a1.8 1.8 0 0 1 3.6 0v8.8a3.6 3.6 0 1 1-3.6 0ZM12.3 9h2" />,

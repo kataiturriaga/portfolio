@@ -3,70 +3,31 @@ import CityHeader from "../CityHeader";
 import GlassCard from "../GlassCard";
 import WeatherIcon from "../WeatherIcon";
 import TrajectoryStrip from "./TrajectoryStrip";
+import ForecastList from "./ForecastList";
 import ContactCard from "./ContactCard";
 import { copy, industries, projects, timeline, articles } from "@/data/home";
-import { projectWeather } from "@/data/weather";
 
 export default function WeatherHome() {
   return (
     <main className="weather-shell">
       <CityHeader
-        over={copy.header.over}
         name={copy.header.name}
         big={copy.header.big}
-        unit={copy.header.unit}
         condition={copy.header.condition}
-        hiLo={copy.header.hiLo}
+        hiLo={copy.header.metrics.map((metric) => (
+          <span key={metric.label}>
+            {metric.label} {metric.value}
+          </span>
+        ))}
       />
 
       <div className="card-stack">
-        <GlassCard icon="termometro" title={copy.trajectory.title} className="span-2">
+        <GlassCard icon="calendario" title={copy.trajectory.title} className="span-2">
           <TrajectoryStrip items={timeline} />
         </GlassCard>
 
         <GlassCard icon="calendario" title={copy.work.title} className="span-2">
-          {projects.map((project) => {
-            const weather = projectWeather[project.client];
-            // Posición del punto en la barra de rango según el año (2023-2026)
-            const yearMatch = project.year.match(/\d{4}/);
-            const year = yearMatch ? Number(yearMatch[0]) : 2023;
-            const dotPosition = Math.min(100, Math.max(0, ((year - 2023) / 3) * 100));
-            const row = (
-              <>
-                <span className="forecast-row__client">{project.client}</span>
-                {project.video ? (
-                  <video
-                    className="forecast-row__thumb"
-                    src={project.video}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                  />
-                ) : (
-                  <WeatherIcon name={weather?.icon ?? "sol"} size={20} />
-                )}
-                <span className="forecast-row__title">{project.title}</span>
-                <span className="forecast-row__range">
-                  <i style={{ left: `${dotPosition}%` }} />
-                </span>
-                <span className="forecast-row__year">{project.year}</span>
-              </>
-            );
-            return project.href ? (
-              <Link
-                key={project.number}
-                href={project.href}
-                className="forecast-row forecast-row--project"
-              >
-                {row}
-              </Link>
-            ) : (
-              <div key={project.number} className="forecast-row forecast-row--project">
-                {row}
-              </div>
-            );
-          })}
+          <ForecastList items={projects} />
           <p className="card-archive-link">
             <Link href="/casos">{copy.work.archive} →</Link>
           </p>

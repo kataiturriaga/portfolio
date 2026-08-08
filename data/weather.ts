@@ -62,6 +62,97 @@ export const projectWeather: Record<string, { icon: WeatherIconName; label: stri
   "Taller 33": { icon: "nieve", label: "Nevada ligera" },
 };
 
+/**
+ * La franja de trayectoria se lee como una previsión por horas: cada etapa
+ * avanza en el día (noche → amanecer → mediodía → tarde) y el icono adopta
+ * además la condición que el visitante tenga puesta en los controles.
+ */
+export const trajectoryPhases = ["noche", "amanecer", "mediodia", "tarde"] as const;
+export type TrajectoryPhase = (typeof trajectoryPhases)[number];
+
+const TRAJECTORY_ICONS: Record<TrajectoryPhase, Record<SkyCondition, WeatherIconName>> = {
+  noche: {
+    despejado: "luna",
+    nubes: "luna-nube",
+    lluvia: "luna-lluvia",
+    nieve: "luna-nieve",
+  },
+  amanecer: {
+    despejado: "amanecer",
+    nubes: "nube-amanecer",
+    lluvia: "sol-lluvia",
+    nieve: "sol-nieve",
+  },
+  mediodia: {
+    despejado: "sol",
+    nubes: "nube-sol",
+    lluvia: "sol-lluvia",
+    nieve: "sol-nieve",
+  },
+  tarde: {
+    despejado: "atardecer",
+    nubes: "nube",
+    lluvia: "lluvia",
+    nieve: "nieve",
+  },
+};
+
+/**
+ * Icono de la etapa `index` de `total`, repartiendo las etapas entre las
+ * cuatro fases del día (con 4 etapas es 1:1; con más o menos, proporcional).
+ */
+export function trajectoryIcon(
+  index: number,
+  total: number,
+  condition: SkyCondition,
+): WeatherIconName {
+  const last = trajectoryPhases.length - 1;
+  const phase =
+    total <= 1
+      ? trajectoryPhases[last]
+      : trajectoryPhases[Math.round((index / (total - 1)) * last)];
+  return TRAJECTORY_ICONS[phase][condition];
+}
+
+/**
+ * Rango de temperaturas plausible para cada condición: la barra de la
+ * previsión se recolorea según el tiempo que el visitante tenga puesto.
+ */
+export const conditionTempRange: Record<SkyCondition, [number, number]> = {
+  nieve: [0, 10],
+  lluvia: [10, 15],
+  nubes: [15, 25],
+  despejado: [25, 40],
+};
+
+/** Escala de color por grados, del frío al calor. */
+const TEMP_STOPS: { t: number; c: [number, number, number] }[] = [
+  { t: -2, c: [74, 127, 212] },
+  { t: 6, c: [90, 200, 250] },
+  { t: 13, c: [64, 214, 176] },
+  { t: 19, c: [126, 222, 90] },
+  { t: 25, c: [255, 214, 10] },
+  { t: 33, c: [255, 159, 10] },
+  { t: 42, c: [255, 69, 58] },
+];
+
+export function tempColor(t: number): string {
+  const first = TEMP_STOPS[0];
+  const last = TEMP_STOPS[TEMP_STOPS.length - 1];
+  if (t <= first.t) return `rgb(${first.c.join(",")})`;
+  if (t >= last.t) return `rgb(${last.c.join(",")})`;
+  for (let i = 0; i < TEMP_STOPS.length - 1; i++) {
+    const a = TEMP_STOPS[i];
+    const b = TEMP_STOPS[i + 1];
+    if (t >= a.t && t <= b.t) {
+      const k = (t - a.t) / (b.t - a.t);
+      const mix = a.c.map((v, j) => Math.round(v + (b.c[j] - v) * k));
+      return `rgb(${mix.join(",")})`;
+    }
+  }
+  return `rgb(${last.c.join(",")})`;
+}
+
 /** Iconos por status de proceso. */
 export const processStatusWeather: Record<string, { icon: WeatherIconName; label: string }> = {
   Borrador: { icon: "nube", label: "Nublado" },
