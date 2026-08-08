@@ -45,13 +45,6 @@ export const skyGradients: Record<DayMoment, Record<SkyCondition, string>> = {
   },
 };
 
-export function defaultMoment(hour: number): DayMoment {
-  if (hour >= 6 && hour < 9) return "amanecer";
-  if (hour >= 9 && hour < 19) return "dia";
-  if (hour >= 19 && hour < 22) return "atardecer";
-  return "noche";
-}
-
 /** Condición meteorológica asignada a cada proyecto (clave = client en data/home.ts). */
 export const projectWeather: Record<string, { icon: WeatherIconName; label: string }> = {
   "El Método": { icon: "amanecer", label: "Amanecer despejado" },

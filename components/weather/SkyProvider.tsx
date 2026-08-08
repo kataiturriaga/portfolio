@@ -8,7 +8,7 @@ import {
   useMemo,
   useState,
 } from "react";
-import { DayMoment, SkyCondition, defaultMoment } from "@/data/weather";
+import { DayMoment, SkyCondition } from "@/data/weather";
 
 type SkyValue = { moment: DayMoment; condition: SkyCondition };
 
@@ -20,11 +20,13 @@ type SkyState = SkyValue & {
 const SkyContext = createContext<SkyState | null>(null);
 const STORAGE_KEY = "kata-sky-v2";
 
-export default function SkyProvider({ children }: { children: React.ReactNode }) {
-  // El servidor no conoce la hora ni el localStorage del visitante: se renderiza
-  // un cielo por defecto y se sincroniza una sola vez tras la hidratación.
-  const [sky, setSky] = useState<SkyValue>({ moment: "noche", condition: "despejado" });
+const DEFAULT_SKY: SkyValue = { moment: "noche", condition: "nubes" };
 
+export default function SkyProvider({ children }: { children: React.ReactNode }) {
+  const [sky, setSky] = useState<SkyValue>(DEFAULT_SKY);
+
+  // El servidor no conoce el localStorage del visitante: se pinta el cielo por
+  // defecto y, si el visitante ya eligió otro, se aplica tras la hidratación.
   useEffect(() => {
     let saved: Partial<SkyValue> | null = null;
     try {
@@ -33,10 +35,11 @@ export default function SkyProvider({ children }: { children: React.ReactNode })
     } catch {
       /* localStorage no disponible */
     }
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- sincronización única post-hidratación con localStorage/hora local
+    if (!saved) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- sincronización única post-hidratación con la elección guardada
     setSky({
-      moment: saved?.moment ?? defaultMoment(new Date().getHours()),
-      condition: saved?.condition ?? "despejado",
+      moment: saved.moment ?? DEFAULT_SKY.moment,
+      condition: saved.condition ?? DEFAULT_SKY.condition,
     });
   }, []);
 
