@@ -151,7 +151,7 @@
 }
 
 .bottom-bar__dots a.is-active {
-  color: #fff;
+  color: var(--fg-full);
 }
 
 .bottom-bar__dots .dot {

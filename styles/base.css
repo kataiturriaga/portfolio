@@ -1,8 +1,8 @@
 /* Base: cuerpo, foco y contenedor de página */
 
 .weather-body {
-  background: #0b1530;
-  color: #fff;
+  background: var(--bg-base);
+  color: var(--fg-full);
   font-family: var(--font-sans);
   font-size: var(--text-base);
   line-height: var(--leading-relaxed);
@@ -11,7 +11,7 @@
 
 .weather-body ::selection {
   background: rgba(255, 255, 255, 0.9);
-  color: #0b1530;
+  color: var(--bg-base);
 }
 
 .weather-body :focus-visible {

@@ -57,6 +57,25 @@
   --border-strong: rgba(255, 255, 255, 0.25); /* chips */
   --scrim: rgba(0, 0, 0, 0.28); /* fondo de bloques de código */
 
+  /* ---- Fondo de respaldo ----
+     Lo que se ve antes de que pinte el cielo, y bajo los materiales. */
+  --bg-base: #0b1530;
+
+  /* ---- Color con significado ---- */
+  --accent-positive: #7ef2a0; /* disponible, estable, correcto */
+
+  /* ---- Paleta meteorológica ----
+     Identidad de los iconos. Vive aquí, no dentro del componente, para poder
+     ajustar el amarillo del sol o el azul de la lluvia en un solo sitio.
+     (Los degradados del cielo y la escala de temperatura NO están aquí a
+     propósito: los interpola JavaScript en el shader y en las barras.) */
+  --w-sun: #ffcc00;
+  --w-sun-deep: #ff9f0a;
+  --w-cloud: #f2f4f8;
+  --w-cloud-dim: #c9d2de;
+  --w-rain: #5ac8fa;
+  --w-moon: #f4f6fb;
+
   /* ---- Materiales translúcidos ---- */
   --glass-blur: 24px; /* cards */
   --control-blur: 18px; /* chips y píldoras flotantes */

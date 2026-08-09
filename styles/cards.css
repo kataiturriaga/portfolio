@@ -85,7 +85,7 @@
 }
 
 .small-card--ok .small-card__value {
-  color: #7ef2a0;
+  color: var(--accent-positive);
 }
 
 /* ---- Prosa dentro de tarjetas ---- */

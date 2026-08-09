@@ -14,7 +14,8 @@
 
 @media (min-width: 760px) {
   .impact-grid {
-    grid-template-columns: repeat(4, 1fr);
+    /* auto-fit para que el número de columnas siga al número de métricas */
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
   }
 }
 

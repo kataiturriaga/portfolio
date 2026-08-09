@@ -27,13 +27,14 @@ export type WeatherIconName =
   | "flecha";
 
 /* Paleta del set meteorológico, en el lenguaje de la app del Tiempo:
-   formas rellenas y multicolor sobre iconos de interfaz monocromos. */
-const SUN = "#ffcc00";
-const SUN_DEEP = "#ff9f0a";
-const CLOUD = "#f2f4f8";
-const CLOUD_DIM = "#c9d2de";
-const RAIN = "#5ac8fa";
-const MOON = "#f4f6fb";
+   formas rellenas y multicolor sobre iconos de interfaz monocromos.
+   Los valores viven en styles/tokens.css; aquí solo se referencian. */
+const SUN = "var(--w-sun)";
+const SUN_DEEP = "var(--w-sun-deep)";
+const CLOUD = "var(--w-cloud)";
+const CLOUD_DIM = "var(--w-cloud-dim)";
+const RAIN = "var(--w-rain)";
+const MOON = "var(--w-moon)";
 
 /** Nube sólida reutilizada por todas las variantes nubladas. */
 const cloudPath = (d: string, fill: string) => <path d={d} fill={fill} stroke="none" />;
