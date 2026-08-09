@@ -1,0 +1,92 @@
+/* ============================================================
+   Design tokens — portfolio (app del Tiempo)
+
+   Única fuente de verdad para tipografía, color, forma y materiales.
+   Si un valor se repite en más de un sitio, vive aquí y no en el CSS.
+   ============================================================ */
+
+:root {
+  /* ---- Tipografía: familia ---- */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI",
+    Inter, Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* ---- Tipografía: escala ----
+     Nueve pasos. Los dos últimos son fluidos porque escalan con el viewport. */
+  --text-xs: 0.6875rem; /* 11px — chips y cabeceras de card en mayúsculas */
+  --text-sm: 0.75rem; /* 12px — metadatos: año, estado, condición */
+  --text-md: 0.875rem; /* 14px — filas, notas, texto de apoyo */
+  --text-base: 1rem; /* 16px — cuerpo */
+  --text-lg: 1.125rem; /* 18px — destacados */
+  --text-xl: 1.25rem; /* 20px — lead de tarjeta */
+  --text-2xl: 1.625rem; /* 26px — puesto, valores grandes */
+  --text-3xl: clamp(2.2rem, 6vw, 3rem); /* título de página */
+  --text-hero: clamp(2.27rem, 11.33vw, 5rem); /* el nombre gigante */
+  --text-city: clamp(1.33rem, 3.33vw, 1.73rem); /* nombre de ciudad */
+
+  /* ---- Tipografía: pesos con rol ---- */
+  --weight-hero: 200; /* solo el nombre gigante */
+  --weight-regular: 400;
+  --weight-medium: 500; /* énfasis suave */
+  --weight-label: 600; /* cabeceras, nombres, etiquetas */
+  --weight-bold: 700; /* título de página */
+
+  /* ---- Tipografía: interlineados ---- */
+  --leading-tight: 1;
+  --leading-snug: 1.2;
+  --leading-normal: 1.35;
+  --leading-relaxed: 1.5;
+  --leading-loose: 1.65;
+
+  /* ---- Texto sobre el cielo ----
+     Cuatro niveles de jerarquía. Todo el texto es blanco; lo que cambia
+     es cuánto se apoya en el fondo. */
+  --fg-1: rgba(255, 255, 255, 0.92); /* primario */
+  --fg-2: rgba(255, 255, 255, 0.82); /* secundario */
+  --fg-3: rgba(255, 255, 255, 0.65); /* terciario */
+  --fg-4: rgba(255, 255, 255, 0.5); /* apagado */
+  --fg-full: #fff; /* máximo contraste */
+
+  /* ---- Superficies y bordes ---- */
+  --surface: rgba(255, 255, 255, 0.1); /* fondo de card */
+  --surface-strong: rgba(255, 255, 255, 0.16); /* card destacada */
+  --surface-hover: rgba(255, 255, 255, 0.18);
+  --surface-subtle: rgba(255, 255, 255, 0.08); /* cajita de icono */
+  --hairline: rgba(255, 255, 255, 0.1); /* separador entre filas */
+  --border: rgba(255, 255, 255, 0.14);
+  --border-strong: rgba(255, 255, 255, 0.25); /* chips */
+  --scrim: rgba(0, 0, 0, 0.28); /* fondo de bloques de código */
+
+  /* ---- Materiales translúcidos ---- */
+  --glass-blur: 24px; /* cards */
+  --control-blur: 18px; /* chips y píldoras flotantes */
+  --control-bg: rgba(20, 25, 45, 0.42);
+  --control-bg-hover: rgba(40, 48, 74, 0.6);
+  --control-active: rgba(255, 255, 255, 0.28);
+
+  /* ---- Forma ---- */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  /* ---- Espaciado (escala de 4px) ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+
+  /* ---- Movimiento ---- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 180ms;
+  --dur-base: 250ms;
+  --dur-slow: 400ms;
+
+  /* ---- Medidas ---- */
+  --page-max: 1120px;
+  --measure: 65ch; /* ancho de línea cómodo para lectura */
+}

@@ -1,0 +1,303 @@
+/* Previsión: filas de proyecto, franja de trayectoria y home */
+
+/* ---- Filas de previsión (proyectos, listas) ---- */
+.forecast-row {
+  display: grid;
+  grid-template-columns: minmax(90px, 1fr) 24px 2fr auto;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--hairline);
+  font-size: var(--text-md);
+}
+
+.forecast-row:first-child {
+  border-top: 0;
+}
+
+.forecast-row__client {
+  font-weight: var(--weight-label);
+}
+
+.forecast-row__title {
+  color: var(--fg-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.forecast-row__year {
+  font-size: var(--text-sm);
+  color: var(--fg-3);
+  white-space: nowrap;
+}
+
+a.forecast-row {
+  transition: background 180ms ease;
+  border-radius: var(--radius-sm);
+  padding-inline: 0.5rem;
+  margin-inline: -0.5rem;
+}
+
+a.forecast-row:hover {
+  background: var(--surface);
+}
+
+
+/* ---- Franja horaria (trayectoria) ---- */
+/* Columnas de igual ancho que llenan la card, como la previsión por horas */
+.hour-strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 0.4rem;
+  padding-bottom: 0.4rem;
+}
+
+.hour-strip button {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 0;
+  padding: 0.7rem 0.4rem;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: #fff;
+  font-size: var(--text-sm);
+  transition: background 180ms ease;
+}
+
+.hour-strip button:hover {
+  background: var(--surface-subtle);
+}
+
+.hour-strip button.is-active {
+  background: var(--surface-hover);
+}
+
+.hour-strip strong {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-label);
+}
+
+/* Detalle de la etapa: tres columnas de ancho fijo —tags, puesto y notas— */
+.stage-detail {
+  display: grid;
+  gap: 1.2rem;
+  margin-top: 0.9rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--hairline);
+}
+
+/* Cuatro columnas idénticas a las de la franja de arriba, para que tags,
+   puesto y texto caigan justo bajo su etapa. */
+@media (min-width: 900px) {
+  .stage-detail {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.4rem;
+    align-items: start;
+  }
+
+  .stage-detail > * {
+    /* mismo padding lateral que los botones de la franja */
+    padding-inline: 0.4rem;
+  }
+
+  .stage-detail .chip-row {
+    grid-column: 1;
+  }
+
+  .stage-detail__role {
+    grid-column: 3;
+  }
+
+  .stage-detail__notes {
+    grid-column: 4;
+  }
+}
+
+/* Apilado en vertical el titular va primero; los tags cierran como metadato */
+@media (max-width: 899px) {
+  .stage-detail__role {
+    order: -1;
+  }
+
+  .stage-detail .chip-row {
+    order: 1;
+  }
+}
+
+.stage-detail__role strong {
+  display: block;
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-regular);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.stage-detail__role span {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-4);
+}
+
+/* Texto corrido, sin lista */
+.stage-detail__notes {
+  margin: 0;
+  color: var(--fg-2);
+  font-size: var(--text-md);
+  line-height: 1.5;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.7rem;
+}
+
+.stage-detail .chip-row {
+  margin-top: 0;
+}
+
+.chip {
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-strong);
+  font-size: var(--text-xs);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+/* ---- Home ---- */
+/* Columnas de ancho fijo para que año, barra y estado queden alineados
+   entre filas; el estado se alinea a la derecha, así un texto largo crece
+   hacia dentro en lugar de desplazar la columna. */
+.forecast-row--project {
+  grid-template-columns:
+    minmax(80px, 1fr) 34px minmax(0, 1.7fr)
+    46px minmax(60px, 120px) 74px;
+}
+
+.forecast-row__thumb {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  border: 1px solid var(--border);
+}
+
+.forecast-row__thumb--icon {
+  display: grid;
+  place-items: center;
+  border-color: transparent;
+  background: var(--surface-subtle);
+}
+
+.forecast-row__yr {
+  font-size: var(--text-md);
+  color: var(--fg-3);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.forecast-row__status {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-label);
+  color: var(--fg-2);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.forecast-row__range {
+  position: relative;
+  display: block;
+  height: 5px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-hover);
+}
+
+.forecast-row__range i {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  min-width: 8px;
+  border-radius: var(--radius-pill);
+  transition: left 400ms ease, width 400ms ease, background 400ms ease;
+}
+
+@media (max-width: 639px) {
+  .forecast-row--project {
+    grid-template-columns: minmax(70px, 1fr) 34px minmax(0, 1.3fr) 42px 62px;
+  }
+
+  .forecast-row__status {
+    display: none;
+  }
+}
+
+.forecast-row--compact {
+  grid-template-columns: 1fr auto;
+  padding: 0.55rem 0;
+  font-size: var(--text-md);
+}
+
+.card-archive-link {
+  margin: 0.9rem 0 0;
+  font-size: var(--text-md);
+  font-weight: var(--weight-label);
+}
+
+.card-archive-link a {
+  opacity: 0.9;
+}
+
+.card-archive-link a:hover {
+  opacity: 1;
+}
+
+.contact-actions {
+  display: grid;
+  gap: 0.7rem;
+  margin: 1rem 0;
+}
+
+@media (min-width: 640px) {
+  .contact-actions {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.contact-actions > * {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-md);
+  background: var(--hairline);
+  color: #fff;
+  cursor: pointer;
+  text-align: left;
+  transition: background 180ms ease;
+}
+
+.contact-actions > *:hover {
+  background: var(--surface-hover);
+}
+
+.contact-actions span {
+  margin-left: auto;
+  font-size: var(--text-sm);
+  color: var(--fg-3);
+}
+
+.contact-updated {
+  font-size: var(--text-sm);
+  color: var(--fg-3);
+}

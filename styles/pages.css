@@ -1,0 +1,210 @@
+/* Páginas: caso, lista de ciudades y procesos */
+
+/* ---- Caso ---- */
+.glance-value {
+  margin-top: 0;
+  font-size: var(--text-md);
+}
+
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 760px) {
+  .impact-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.impact-grid .is-pending {
+  opacity: 0.55;
+}
+
+.decision-from {
+  color: var(--fg-2);
+  font-style: italic;
+}
+
+.decision-list {
+  margin: 0 0 0.9rem;
+  padding-left: 1.15rem;
+  color: var(--fg-1);
+  line-height: 1.6;
+  list-style: disc;
+}
+
+.decision-list li {
+  margin: 0.3rem 0;
+}
+
+.decision-list li::marker {
+  color: var(--fg-4);
+}
+
+.decision-alt summary {
+  cursor: pointer;
+  font-weight: var(--weight-label);
+  font-size: var(--text-md);
+  margin-bottom: 0.5rem;
+}
+
+.decision-schema {
+  overflow-x: auto;
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  background: var(--scrim);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+.decision-media img,
+.decision-compare img,
+.decision-compare video {
+  display: block;
+  width: 100%;
+  max-height: 460px;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--surface-strong);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* Reserva altura: algunos vídeos de iPhone (HEVC) no reportan dimensiones
+   en navegadores que no los decodifican y colapsarían la caja. */
+.decision-compare video {
+  aspect-ratio: 9 / 16;
+  height: 460px;
+}
+
+.decision-media figcaption,
+.decision-compare figcaption {
+  margin-top: 0.4rem;
+  font-size: var(--text-sm);
+  color: var(--fg-3);
+}
+
+.decision-compare {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 640px) {
+  .decision-compare {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.decision-compare figure {
+  margin: 0;
+}
+
+/* ---- Lista de ciudades ---- */
+.city-list {
+  position: relative;
+}
+
+.city-list::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.city-list__title {
+  margin: 0 0 1.4rem;
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-bold);
+  letter-spacing: -0.02em;
+}
+
+.city-list__card {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 1.2rem;
+  margin-bottom: 0.9rem;
+  transition: background 180ms ease;
+}
+
+.city-list__card:hover {
+  background: var(--surface-strong);
+}
+
+.city-list__card.is-static:hover {
+  background: var(--hairline);
+}
+
+.city-list__card strong {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-label);
+}
+
+.city-list__card p {
+  margin: 0.15rem 0 0.3rem;
+  color: var(--fg-2);
+}
+
+.city-list__card small {
+  font-size: var(--text-sm);
+  color: var(--fg-3);
+}
+
+.city-list__side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.city-list__side span {
+  font-size: var(--text-sm);
+  color: var(--fg-3);
+  white-space: nowrap;
+}
+
+/* ---- Procesos ---- */
+.map-intro {
+  max-width: 55ch;
+  margin: 0 0 1.6rem;
+  color: var(--fg-2);
+}
+
+.map-category-desc {
+  margin: 0 0 0.7rem;
+  font-size: var(--text-md);
+  color: var(--fg-2);
+}
+
+.process-steps-list {
+  margin: 0;
+  padding-left: 1.6rem;
+  line-height: 1.7;
+  list-style: decimal;
+}
+
+.process-steps-list li {
+  margin: 0.45rem 0;
+}
+
+.process-steps-list li::marker {
+  color: var(--fg-4);
+  font-variant-numeric: tabular-nums;
+}
+
+.process-pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-weight: var(--weight-label);
+}
+
+/* El número de proceso ("1.6") no necesita la columna ancha de un cliente. */
+.forecast-row--process {
+  grid-template-columns: 42px 24px 1fr auto;
+}

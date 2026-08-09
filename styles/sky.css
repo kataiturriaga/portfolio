@@ -1,0 +1,127 @@
+/* Cielo: capas, partículas y controles */
+
+/* ---- Cielo ---- */
+.sky {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.sky__layer {
+  position: absolute;
+  inset: 0;
+}
+
+.sky::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+}
+
+.sky__stars {
+  position: absolute;
+  inset: 0;
+}
+
+.sky__stars span {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #fff;
+  animation: star-twinkle 4s ease-in-out infinite;
+}
+
+@keyframes star-twinkle {
+  50% {
+    opacity: 0.15;
+  }
+}
+
+.sky__gl {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.sky__fx {
+  position: absolute;
+  inset: 0;
+}
+
+.sky__fx-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Fallback de nubes CSS cuando WebGL no está disponible */
+.sky__cloud {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  filter: blur(38px);
+  animation: cloud-drift linear infinite;
+}
+
+@keyframes cloud-drift {
+  from {
+    transform: translateX(-30vw);
+  }
+  to {
+    transform: translateX(110vw);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sky__stars,
+  .sky__cloud {
+    display: none;
+  }
+}
+
+/* ---- Controles del cielo ---- */
+.sky-controls {
+  position: fixed;
+  top: 0.9rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: calc(100vw - 1.6rem);
+}
+
+.seg {
+  display: flex;
+  padding: 3px;
+  border-radius: var(--radius-pill);
+  background: var(--control-bg);
+  backdrop-filter: blur(var(--control-blur));
+  -webkit-backdrop-filter: blur(var(--control-blur));
+  border: 1px solid var(--border);
+}
+
+.seg button {
+  cursor: pointer;
+  padding: 0.32rem 0.72rem;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--fg-2);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-label);
+  letter-spacing: 0.01em;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+.seg button.is-active {
+  background: var(--control-active);
+  color: var(--fg-full);
+}

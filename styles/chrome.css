@@ -1,0 +1,163 @@
+/* Chrome de la app: cabecera de ciudad y barra inferior */
+
+/* ---- Cabecera de ciudad ---- */
+/* Ocupa dos tercios del alto de pantalla (descontando lo que el shell ya
+   reserva arriba para los controles) con el texto centrado en ambos ejes. */
+.city-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(66.67vh - var(--shell-top, 0px));
+  padding: 0 0 1.5rem;
+  text-align: center;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.18);
+}
+
+.city-header__over {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-label);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+}
+
+.city-header__name {
+  margin: 0.2rem 0 0;
+  font-size: var(--text-city);
+  font-weight: var(--weight-regular);
+  /* line-height ajustado: el 1.5 heredado metía aire bajo "Kata" */
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+/* Escala con el ancho: aquí no va un número corto sino una palabra larga,
+   así que el tamaño se ata al viewport y se capa en pantallas grandes. */
+.city-header__big {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  max-width: 100%;
+  margin: -0.55rem 0 0.2rem;
+  font-size: var(--text-hero);
+  font-weight: var(--weight-hero);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.city-header__big sup {
+  position: static;
+  top: auto;
+  margin-top: 0.9rem;
+  font-size: 0.32em;
+  font-weight: var(--weight-regular);
+}
+
+.city-header__condition {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  line-height: 1.35;
+  color: var(--fg-1);
+}
+
+/* Mismo tratamiento tipográfico que la línea de condición */
+.city-header__hilo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 1rem;
+  margin-top: 0;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  line-height: 1.35;
+  color: var(--fg-1);
+}
+
+/* Con exactamente dos datos, las columnas se igualan para que el hueco caiga
+   en el centro y cada texto cuelgue de él. */
+.city-header__hilo:has(> :nth-child(2):last-child) {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.city-header__hilo:has(> :nth-child(2):last-child) > :first-child {
+  text-align: right;
+}
+
+.city-header__hilo:has(> :nth-child(2):last-child) > :last-child {
+  text-align: left;
+}
+
+/* ---- Barra inferior ---- */
+/* Sin banda de fondo: los tres grupos flotan sobre el cielo con el mismo
+   tratamiento de píldora que los chips de arriba. */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 1.3rem calc(0.7rem + env(safe-area-inset-bottom));
+  background: transparent;
+  pointer-events: none;
+}
+
+.bottom-bar > * {
+  pointer-events: auto;
+}
+
+.bottom-bar > a,
+.bottom-bar__dots {
+  border-radius: var(--radius-pill);
+  background: var(--control-bg);
+  backdrop-filter: blur(var(--control-blur));
+  -webkit-backdrop-filter: blur(var(--control-blur));
+  border: 1px solid var(--border);
+}
+
+.bottom-bar > a {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  color: var(--fg-2);
+  transition: background 180ms ease;
+}
+
+.bottom-bar > a:hover {
+  background: var(--control-bg-hover);
+}
+
+.bottom-bar__dots {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.62rem 0.95rem;
+}
+
+.bottom-bar__dots a {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--fg-4);
+  transition: color 180ms ease;
+}
+
+.bottom-bar__dots a:hover {
+  color: var(--fg-2);
+}
+
+.bottom-bar__dots a.is-active {
+  color: #fff;
+}
+
+.bottom-bar__dots .dot {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}

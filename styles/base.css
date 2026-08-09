@@ -1,0 +1,40 @@
+/* Base: cuerpo, foco y contenedor de página */
+
+.weather-body {
+  background: #0b1530;
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  -webkit-font-smoothing: antialiased;
+}
+
+.weather-body ::selection {
+  background: rgba(255, 255, 255, 0.9);
+  color: #0b1530;
+}
+
+.weather-body :focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.9);
+  outline-offset: 3px;
+  border-radius: var(--radius-xs);
+}
+
+/* ---- Contenedor de página ---- */
+.weather-shell {
+  --shell-top: 6.2rem;
+  width: min(100%, var(--page-max));
+  margin-inline: auto;
+  padding: var(--shell-top) 1.1rem 7.5rem;
+}
+
+@media (min-width: 760px) {
+  .weather-shell {
+    --shell-top: 7rem;
+  }
+}
+
+/* ---- Página (transición de entrada) ---- */
+.city-screen {
+  min-height: 100vh;
+}

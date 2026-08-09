@@ -1,0 +1,107 @@
+/* Tarjetas glass, rejillas y prosa interior */
+
+/* ---- Tarjetas glass ---- */
+.glass-card {
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.glass-card__head {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.75rem 1rem 0.5rem;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  border-bottom: 1px solid var(--hairline);
+}
+
+/* Vibrancy de iOS: el label no es un blanco plano, se suma al material que
+   tiene detrás, así que se aclara u oscurece con el fondo de la card. */
+@supports (mix-blend-mode: plus-lighter) {
+  .glass-card__head > * {
+    mix-blend-mode: plus-lighter;
+    color: var(--fg-3);
+  }
+}
+
+.glass-card__body {
+  padding: 0.9rem 1rem 1rem;
+}
+
+.glass-card--alert {
+  background: var(--surface-strong);
+}
+
+.glass-card a {
+  color: inherit;
+}
+
+/* ---- Rejillas ---- */
+.card-stack {
+  display: grid;
+  gap: 0.9rem;
+}
+
+@media (min-width: 760px) {
+  .card-stack {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card-stack > .span-2 {
+    grid-column: 1 / -1;
+  }
+}
+
+.small-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.9rem;
+}
+
+@media (min-width: 760px) {
+  .small-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.small-card__value {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-regular);
+  line-height: 1.15;
+}
+
+.small-card__note {
+  margin-top: 0.35rem;
+  font-size: var(--text-sm);
+  color: var(--fg-2);
+}
+
+.small-card--ok .small-card__value {
+  color: #7ef2a0;
+}
+
+/* ---- Prosa dentro de tarjetas ---- */
+.card-prose p {
+  max-width: var(--measure);
+  margin: 0 0 0.9rem;
+  color: var(--fg-1);
+  line-height: 1.65;
+}
+
+.card-prose p:last-child {
+  margin-bottom: 0;
+}
+
+.card-lead {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-medium);
+  line-height: 1.35;
+}
