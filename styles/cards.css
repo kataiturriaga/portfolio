@@ -60,6 +60,36 @@
   }
 }
 
+/* Rejilla del caso: seis columnas para admitir tercios y mitades a la vez.
+   Cada bloque declara su ancho; en móvil todos ocupan la fila entera. */
+.case-grid {
+  display: grid;
+  gap: 0.9rem;
+}
+
+@media (min-width: 760px) {
+  .case-grid {
+    grid-template-columns: repeat(6, 1fr);
+    align-items: start;
+  }
+
+  .col-third {
+    grid-column: span 2;
+  }
+
+  .col-half {
+    grid-column: span 3;
+  }
+
+  .col-two-thirds {
+    grid-column: span 4;
+  }
+
+  .col-full {
+    grid-column: 1 / -1;
+  }
+}
+
 .small-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

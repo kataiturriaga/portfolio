@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import WeatherIcon from "@/components/weather/WeatherIcon";
 import { projects } from "@/data/home";
-import { projectWeather } from "@/data/weather";
 
 export const metadata: Metadata = {
   title: "Casos — Kata Iturriaga",
@@ -14,7 +13,6 @@ export default function CasosPage() {
     <main className="weather-shell city-list">
       <h1 className="city-list__title">Casos</h1>
       {projects.map((project) => {
-        const weather = projectWeather[project.client];
         const card = (
           <>
             <div>
@@ -25,7 +23,7 @@ export default function CasosPage() {
               </small>
             </div>
             <div className="city-list__side">
-              <WeatherIcon name={weather?.icon ?? "sol"} size={26} />
+              <WeatherIcon name={project.weather} size={26} />
               <span>
                 {project.status} · {project.year}
               </span>

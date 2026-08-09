@@ -1,3 +1,5 @@
+import type { WeatherIconName } from "@/components/weather/WeatherIcon";
+import { casos } from "./casos";
 import { featuredProcesses } from "./processes";
 
 export const stats = [
@@ -17,33 +19,22 @@ export type Project = {
   status: string;
   /** Franja de "temperatura" (0-1) dentro del rango de la condición actual */
   tempBand: [number, number];
+  /** Icono meteorológico de la fila */
+  weather: WeatherIconName;
   domain: string;
   role: string;
-  tone: string;
+  tone?: string;
   image?: string;
   video?: string;
   href?: string;
 };
 
-export const projects: Project[] = [
-  {
-    number: "01",
-    client: "El Método",
-    title: "Añadiendo capas: la app coached de la v1 a la v2",
-    shortTitle: "Añadiendo capas",
-    year: "2026",
-    status: "Lanzado",
-    tempBand: [0.55, 0.92],
-    domain: "Salud y fitness",
-    role: "Product Designer + PM",
-    tone: "cobalt",
-    image: "/casos/asesorias-v2-app/hero-v2-app-final.jpg",
-    video: "/casos/asesorias-v2-app/978_1080x30_shots_so.mp4",
-    href: "/casos/asesorias-v2-app",
-  },
+/** Proyectos que todavía no tienen caso escrito. */
+export const otherProjects: Project[] = [
   {
     number: "02",
     client: "Archivo Sur",
+    weather: "nube-sol",
     title: "Una nueva forma de leer lo que importa",
     shortTitle: "Leer lo que importa",
     year: "2025",
@@ -56,6 +47,7 @@ export const projects: Project[] = [
   {
     number: "03",
     client: "Nexo",
+    weather: "niebla",
     title: "Crédito pensado para la vida real",
     shortTitle: "Crédito para la vida real",
     year: "2025",
@@ -68,6 +60,7 @@ export const projects: Project[] = [
   {
     number: "04",
     client: "Cancha",
+    weather: "sol",
     title: "El deporte local cruza fronteras",
     shortTitle: "Deporte local sin fronteras",
     year: "2024",
@@ -80,6 +73,7 @@ export const projects: Project[] = [
   {
     number: "05",
     client: "Común",
+    weather: "nube",
     title: "Participar también puede ser sencillo",
     shortTitle: "Participar sin fricción",
     year: "2024",
@@ -92,6 +86,7 @@ export const projects: Project[] = [
   {
     number: "06",
     client: "Taller 33",
+    weather: "nieve",
     title: "Un sistema para crear sin empezar de cero",
     shortTitle: "Crear sin empezar de cero",
     year: "2023",
@@ -101,6 +96,29 @@ export const projects: Project[] = [
     role: "Estrategia + UI",
     tone: "ink",
   },
+];
+
+/**
+ * La previsión de la home se compone: primero los casos con página propia
+ * (derivados de data/casos.ts, sin duplicar cliente, año ni estado) y
+ * después los proyectos que aún no tienen caso.
+ */
+export const projects: Project[] = [
+  ...casos.map((caso, i) => ({
+    number: String(i + 1).padStart(2, "0"),
+    client: caso.client,
+    title: caso.title,
+    shortTitle: caso.shortTitle,
+    year: caso.year,
+    status: caso.status,
+    tempBand: caso.tempBand,
+    weather: caso.weather,
+    domain: caso.role,
+    role: caso.role,
+    video: caso.video,
+    href: `/casos/${caso.slug}`,
+  })),
+  ...otherProjects,
 ];
 
 export const industries = [

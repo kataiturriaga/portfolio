@@ -17,7 +17,7 @@ export async function generateMetadata({
   if (!caso) return {};
   return {
     title: `${caso.title} — Kata Iturriaga`,
-    description: caso.thesis,
+    description: caso.summary,
   };
 }
 

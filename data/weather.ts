@@ -45,16 +45,6 @@ export const skyGradients: Record<DayMoment, Record<SkyCondition, string>> = {
   },
 };
 
-/** Condición meteorológica asignada a cada proyecto (clave = client en data/home.ts). */
-export const projectWeather: Record<string, { icon: WeatherIconName; label: string }> = {
-  "El Método": { icon: "amanecer", label: "Amanecer despejado" },
-  "Archivo Sur": { icon: "nube-sol", label: "Claros por la tarde" },
-  Nexo: { icon: "niebla", label: "Niebla matinal" },
-  Cancha: { icon: "sol", label: "Soleado" },
-  Común: { icon: "nube", label: "Nubes altas" },
-  "Taller 33": { icon: "nieve", label: "Nevada ligera" },
-};
-
 /**
  * La franja de trayectoria se lee como una previsión por horas: cada etapa
  * avanza en el día (noche → amanecer → mediodía → tarde) y el icono adopta

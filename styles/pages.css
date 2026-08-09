@@ -37,16 +37,16 @@
 .thesis-split__body {
   margin: 0;
   max-width: var(--measure);
-  line-height: var(--leading-loose);
+  line-height: var(--leading-normal);
 }
 
 .thesis-split__teaser {
-  font-size: var(--text-sm);
+  font-size: var(--text-md);
   color: var(--fg-2);
 }
 
 .thesis-split__body {
-  font-size: var(--text-base);
+  font-size: var(--text-2xl);
   color: var(--fg-1);
 }
 

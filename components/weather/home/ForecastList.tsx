@@ -3,7 +3,7 @@
 import Link from "next/link";
 import WeatherIcon from "../WeatherIcon";
 import { useSky } from "../SkyProvider";
-import { conditionTempRange, projectWeather, tempColor } from "@/data/weather";
+import { conditionTempRange, tempColor } from "@/data/weather";
 import type { projects as projectList } from "@/data/home";
 
 export default function ForecastList({ items }: { items: typeof projectList }) {
@@ -13,7 +13,6 @@ export default function ForecastList({ items }: { items: typeof projectList }) {
   return (
     <>
       {items.map((project) => {
-        const weather = projectWeather[project.client];
         const [from, to] = project.tempBand;
         // La franja es relativa (0-1); los grados salen del rango de la condición
         const tMin = lo + (hi - lo) * from;
@@ -33,7 +32,7 @@ export default function ForecastList({ items }: { items: typeof projectList }) {
               />
             ) : (
               <span className="forecast-row__thumb forecast-row__thumb--icon">
-                <WeatherIcon name={weather?.icon ?? "sol"} size={22} />
+                <WeatherIcon name={project.weather} size={22} />
               </span>
             )}
             <span className="forecast-row__title">{project.shortTitle}</span>
