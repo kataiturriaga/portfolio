@@ -19,6 +19,37 @@
   }
 }
 
+/* La tesis en dos columnas: teaser a la izquierda, desarrollo a la derecha */
+.thesis-split {
+  display: grid;
+  gap: var(--space-3);
+}
+
+@media (min-width: 760px) {
+  .thesis-split {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+    align-items: start;
+  }
+}
+
+.thesis-split__teaser,
+.thesis-split__body {
+  margin: 0;
+  max-width: var(--measure);
+  line-height: var(--leading-loose);
+}
+
+.thesis-split__teaser {
+  font-size: var(--text-sm);
+  color: var(--fg-2);
+}
+
+.thesis-split__body {
+  font-size: var(--text-base);
+  color: var(--fg-1);
+}
+
 .impact-grid .is-pending {
   opacity: 0.55;
 }

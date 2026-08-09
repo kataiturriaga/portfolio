@@ -70,7 +70,7 @@ export const casos: CaseStudy[] = [
     heroTitle: "Añadiendo capas",
     heroSubtitle: "La v1 era plana; la v2 le dio profundidad a cada flujo.",
     thesis:
-      "La v1 era plana. Un estilo de entreno, una lista de dieta, un contador de pasos que nadie miraba.",
+      "La versión uno era plana, un estilo de entreno, una lista de dieta, un contador de pasos sin profundidad",
     subthesis:
       "La v2 le dio profundidad a cada flujo: más experiencias de entreno, una dieta con capas, los pasos convertidos en juego y una puerta de entrada sin fricción.",
     glance: {
@@ -85,25 +85,17 @@ export const casos: CaseStudy[] = [
     },
     impact: [
       {
-        value: "Por medir",
-        label: "Retención del cliente coached",
-        note: "v2 en producción desde julio de 2026",
-        pending: true,
+        value: "20% → 13%",
+        label: "Cancelaciones mensuales",
       },
       {
-        value: "Por medir",
-        label: "% de cancelaciones",
-        pending: true,
+        value: "350 € → 538 €",
+        label: "LTV por cliente",
+        note: "Cuota media ÷ churn mensual · estimado",
       },
       {
-        value: "Por medir",
+        value: "50% → 85%",
         label: "Adherencia (entrenos completados)",
-        pending: true,
-      },
-      {
-        value: "Por medir",
-        label: "Uso del ranking de pasos",
-        pending: true,
       },
     ],
     problem: {

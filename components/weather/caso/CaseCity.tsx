@@ -79,24 +79,16 @@ export default function CaseCity({ caso }: { caso: CaseStudy }) {
       />
 
       <div className="card-stack">
-        <GlassCard
-          icon="campana"
-          title="Aviso destacado · La tesis"
-          className="glass-card--alert span-2"
-        >
-          <div className="card-prose">
-            <p className="card-lead">{caso.thesis}</p>
-            <p>{caso.subthesis}</p>
+        <GlassCard icon="campana" title="Aviso destacado" className="glass-card--alert span-2">
+          <div className="thesis-split">
+            <p className="thesis-split__teaser">{caso.thesis}</p>
+            <p className="thesis-split__body">{caso.subthesis}</p>
           </div>
         </GlassCard>
 
-        <div className="small-grid span-2">
+        <div className="small-grid small-grid--pair span-2">
           {(
             [
-              ["Rol", caso.glance.role],
-              ["Periodo", caso.glance.period],
-              ["Equipo", caso.glance.team],
-              ["Producto", caso.glance.product],
               ["Problema", caso.glance.problem],
               ["Solución", caso.glance.solution],
             ] as const
