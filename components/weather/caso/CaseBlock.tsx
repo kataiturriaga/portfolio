@@ -1,5 +1,6 @@
 import Link from "next/link";
 import GlassCard from "../GlassCard";
+import GlassIcon from "../GlassIcon";
 import type { CaseBlock as Block, Decision } from "@/data/casos";
 
 /** Un bloque solo decide cuántas columnas ocupa; el resto lo fija el sistema. */
@@ -69,6 +70,13 @@ export default function CaseBlock({ block }: { block: Block }) {
           className={`glass-card--alert ${width}`}
         >
           <div className="thesis-split">
+            {block.glassIcon ? (
+              <GlassIcon
+                name={block.glassIcon}
+                size={72}
+                className="thesis-split__icon"
+              />
+            ) : null}
             <p className="thesis-split__teaser">{block.teaser}</p>
             <p className="thesis-split__body">{block.body}</p>
           </div>

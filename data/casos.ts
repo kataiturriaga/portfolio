@@ -1,3 +1,4 @@
+import type { GlassIconName } from "@/components/weather/GlassIcon";
 import type { WeatherIconName } from "@/components/weather/WeatherIcon";
 
 export type CaseMedia = { src: string; alt: string; caption?: string };
@@ -44,7 +45,13 @@ type Base = { width?: BlockWidth };
  * ritmo puede variar de un caso a otro sin que cambie el lenguaje visual.
  */
 export type CaseBlock =
-  | (Base & { type: "alert"; title?: string; teaser: string; body: string })
+  | (Base & {
+      type: "alert";
+      title?: string;
+      teaser: string;
+      body: string;
+      glassIcon?: GlassIconName;
+    })
   | (Base & { type: "fact"; label: string; text: string; icon?: WeatherIconName })
   | (Base & { type: "metrics"; title?: string; items: ImpactMetric[] })
   | (Base & {
@@ -97,6 +104,7 @@ export const casos: CaseStudy[] = [
     {
       type: "alert",
       width: "full",
+      glassIcon: "app-stack",
       teaser:
         "La versión uno era plana, un estilo de entreno, una lista de dieta, un contador de pasos sin profundidad",
       body: "La v2 le dio profundidad a cada flujo: más experiencias de entreno, una dieta con capas, los pasos convertidos en juego y una puerta de entrada sin fricción.",

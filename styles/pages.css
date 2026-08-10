@@ -25,12 +25,23 @@
   gap: var(--space-3);
 }
 
+/* Cuatro columnas: icono, teaser y el desarrollo ocupando las dos últimas */
 @media (min-width: 760px) {
   .thesis-split {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
     gap: var(--space-5);
     align-items: start;
   }
+
+  .thesis-split__body {
+    grid-column: 3 / span 2;
+  }
+}
+
+.thesis-split__icon {
+  display: block;
+  width: 72px;
+  height: 72px;
 }
 
 .thesis-split__teaser,
