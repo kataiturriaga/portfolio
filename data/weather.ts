@@ -45,6 +45,65 @@ export const skyGradients: Record<DayMoment, Record<SkyCondition, string>> = {
   },
 };
 
+/* ---- Tonos de widget ----
+   Los widgets de datos no tienen color propio: toman dos tonos del cielo activo
+   (A, más claro; B, más oscuro). Cada tono se oscurece lo justo para que el
+   texto blanco siga cumpliendo contraste, también en los cielos claros. */
+
+type RGB = [number, number, number];
+
+const hexToRgb = (hex: string): RGB => {
+  const n = parseInt(hex.slice(1), 16);
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+};
+
+const rgbToHex = ([r, g, b]: RGB) =>
+  `#${[r, g, b].map((v) => Math.round(v).toString(16).padStart(2, "0")).join("")}`;
+
+const luminance = ([r, g, b]: RGB) => {
+  const lin = (v: number) => {
+    const c = v / 255;
+    return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+  };
+  return 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
+};
+
+/** Oscurece un color hasta que su luminancia relativa no pase de `maxL`. */
+function darkenTo(hex: string, maxL: number): string {
+  let rgb = hexToRgb(hex);
+  for (let i = 0; i < 30 && luminance(rgb) > maxL; i++) {
+    rgb = rgb.map((v) => v * 0.94) as RGB;
+  }
+  return rgbToHex(rgb);
+}
+
+const stopsOf = (gradient: string) => gradient.match(/#[0-9a-f]{6}/gi) ?? ["#0b1530"];
+
+/** Tonos A y B (degradados CSS) derivados del cielo activo. */
+export function widgetTones(moment: DayMoment, condition: SkyCondition) {
+  const [c0, c1 = c0, c2 = c1] = stopsOf(skyGradients[moment][condition]);
+  return {
+    a: `linear-gradient(160deg, ${darkenTo(c1, 0.2)}, ${darkenTo(c2, 0.22)})`,
+    b: `linear-gradient(160deg, ${darkenTo(c0, 0.1)}, ${darkenTo(c1, 0.14)})`,
+  };
+}
+
+/**
+ * Cielo propio de cada proyecto, según su icono de condición. Los proyectos
+ * y el caso destacado lo conservan siempre, cambie como cambie el cielo global.
+ */
+export const projectSkies: Partial<Record<WeatherIconName, string>> = {
+  amanecer: "linear-gradient(160deg, #2e3a59 0%, #7c6a8e 50%, #e8927c 100%)",
+  "nube-sol": "linear-gradient(160deg, #3f6a93, #7da2c2)",
+  niebla: "linear-gradient(160deg, #4a4560, #9a8090)",
+  sol: "linear-gradient(160deg, #0f5fc0, #3d92e0)",
+  nube: "linear-gradient(160deg, #1c2333, #46506a)",
+  nieve: "linear-gradient(160deg, #55667f, #9aa8bb)",
+};
+
+export const projectSky = (icon: WeatherIconName) =>
+  projectSkies[icon] ?? projectSkies.nube!;
+
 /**
  * La franja de trayectoria se lee como una previsión por horas: cada etapa
  * avanza en el día (noche → amanecer → mediodía → tarde) y el icono adopta

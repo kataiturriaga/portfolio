@@ -8,6 +8,8 @@
 @import "../styles/cards.css";
 @import "../styles/forecast.css";
 @import "../styles/pages.css";
+@import "../styles/home.css";
+@import "../styles/case.css";
 
 * {
   box-sizing: border-box;

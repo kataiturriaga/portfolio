@@ -22,6 +22,12 @@ export type Decision = {
   decided: string[]; // qué decidimos y por qué
   alternatives?: string[];
   finalStructure?: string; // estructura final en texto
+  /** Cambio de profundidad para el índice, p. ej. "1→3" */
+  depth?: string;
+  /** Estructura final como pasos encadenados (se pinta en chips) */
+  flow?: string[];
+  /** Versión corta para las tres columnas; el texto largo queda plegado */
+  brief?: { from: string; decided: string[]; alternatives?: string[] };
   media?: CaseMedia;
   comparison?: {
     before: { src: string; alt: string }; // imagen estática
@@ -70,7 +76,9 @@ export type CaseStudy = {
   slug: string;
   title: string; // título largo, para metadatos
   client: string; // nombre de ciudad y clave en la previsión de la home
-  heroTitle: string; // el dato gigante del hero
+  heroTitle: string; // título del caso bajo el cliente
+  /** El dato gigante del hero: el resultado que mejor resume el caso */
+  heroMetric?: { value: string; unit?: string; label: string };
   period: string;
   role: string;
   summary: string; // descripción corta para metadatos
@@ -90,6 +98,7 @@ export const casos: CaseStudy[] = [
     title: "Asesorías V2 — la app del cliente",
     client: "El Método",
     heroTitle: "Añadiendo capas",
+    heroMetric: { value: "85", unit: "%", label: "Adherencia a los entrenos · antes 50%" },
     period: "03/26 - ahora",
     role: "Product Designer + PM",
     summary:
@@ -171,6 +180,20 @@ export const casos: CaseStudy[] = [
         summary: "El contador de pasos pasa de dato pasivo a un ranking social que refuerza la filosofía de la marca.",
         shortLabel: "Pasos",
         area: "Retención / gamificación / filosofía de marca",
+        depth: "1→3",
+        flow: ["Contador diario", "Ranking entre clientes", "Score del ciclo"],
+        brief: {
+          from: "Andar es media ecuación del método, pero el producto lo trataba como un dato menor: un número que no llevaba a ninguna parte.",
+          decided: [
+            "Contador rediseñado e interactivo.",
+            "Ranking entre clientes por objetivo cumplido.",
+            "El % de días con objetivo alimenta el score del ciclo.",
+          ],
+          alternatives: [
+            "Solo objetivo personal: sin palanca social.",
+            "Medallas individuales: sin gancho competitivo.",
+          ],
+        },
         from: "En la v1 la app tenía un contador de pasos: un número pasivo que registraba el día y no llevaba a ninguna parte. El objetivo de pasos diarios es una de las patas de la filosofía del método, combinar el entrenamiento de fuerza (u otras modalidades) con movimiento moderado, andar. Pero el producto no lo trataba como algo que importara.",
         decided: [
           "En la v2 elevamos el contador con un diseño más cuidado e interactivo, y encima construimos un ranking basado en los pasos: los clientes compiten entre ellos por cumplir el objetivo diario. El número deja de ser un registro privado y pasa a ser una posición social.",
@@ -205,6 +228,21 @@ export const casos: CaseStudy[] = [
         summary: "La dieta pasa de una lista plana a una experiencia visual con recetas, equivalencias y raciones.",
         shortLabel: "Dieta",
         area: "Consulta de dieta / experiencia diaria del cliente",
+        depth: "1→4",
+        flow: ["Chips de comidas", "Cards por opción", "Ingredientes", "Detalle", "Recetas"],
+        brief: {
+          from: "Dos pantallas para dos decisiones y una lista sin recetas ni equivalencias. Un documento, no una herramienta.",
+          decided: [
+            "Chips por comida y cards con la foto del plato.",
+            "Acordeón de ingredientes sin cambiar de pantalla.",
+            "Detalle con tabs, Raciones/Unidades, equivalencias y recetas.",
+          ],
+          alternatives: [
+            "Tabs fijos: las abreviaturas perdían contexto.",
+            "Bottom sheet: obligaba a definir el sheet.",
+            "Timeline vertical: pesado para la consulta rápida.",
+          ],
+        },
         from: "La pantalla de dieta de la v1 separaba las dos decisiones del usuario en dos pantallas, y además era una lista sin variedad: sin recetas, sin equivalencias, sin forma de ver las cantidades en el formato que cada cliente prefiere. Pura consulta rápida antes de comer, tratada como un documento.",
         decided: [
           "Chips para navegar entre las comidas del día y cards con la foto del plato a ancho completo como protagonista, con un badge de 'Opción 1/2/3'. La comida es visual: ver el plato reduce la carga de la decisión más que cualquier texto. Todo apoyado en el dato de que el 58% abre la app justo antes de comer, cuando cada pantalla extra es fricción real.",
@@ -226,6 +264,20 @@ export const casos: CaseStudy[] = [
         summary: "De solo fuerza a cuatro modalidades, y de 'qué hice ayer' a 'estoy mejorando' por ejercicio.",
         shortLabel: "Entreno",
         area: "Retención / motivación / progreso de entrenamiento",
+        depth: "1→3",
+        flow: ["Marcas por ejercicio", "Tarjeta con delta", "Línea de progreso", "Hoja del ejercicio"],
+        brief: {
+          from: "Una sola experiencia, fuerza, y un histórico plano fuera del flujo. El entreno era un checklist sin motivación.",
+          decided: [
+            "Fuerza, híbrido, running y Hyrox, cada uno con su métrica.",
+            "Tarjeta por ejercicio con línea de progreso.",
+            "Delta frente a la sesión anterior en color de marca.",
+          ],
+          alternatives: [
+            "Solo la última marca: sin valor motivacional.",
+            "Gráfico agregado de volumen: esconde el progreso.",
+          ],
+        },
         from: "La v1 ofrecía una sola experiencia de entrenamiento: fuerza. Y el histórico de marcas era una lista plana de todos los entrenos realizados, además fuera del flujo donde hacía falta. Para saber cuál había sido tu último peso en press banca tenías que salir del entreno, adivinar en qué sesión pasada aparecía ese ejercicio, mirar el resultado y volver. No le mostrábamos al cliente su progreso: el entreno era un checklist que cumplir, sin ninguna motivación interna.",
         decided: [
           "Ampliamos la oferta a varias modalidades: además de fuerza, híbrido, running y Hyrox, cada una con su propia métrica (kg, tiempo en mm:ss, rondas, AMRAP). El producto deja de asumir un único tipo de cliente.",
@@ -246,6 +298,20 @@ export const casos: CaseStudy[] = [
         summary: "Una sola pantalla de acceso decide por identidad y optimiza para el 98% que son usuarios que ya existen.",
         shortLabel: "Entrada",
         area: "Autenticación / onboarding / entrada a la app",
+        depth: "6→1",
+        flow: ["Welcome", "Acceso (Google, Apple, email)", "¿Ya tienes cuenta?", "Login o cuestionario"],
+        brief: {
+          from: "Login y registro en la misma pantalla. Usuarios nuevos se saltaban el cuestionario y entraban con la app vacía.",
+          decided: [
+            "Dos puertas, una sola pantalla de acceso.",
+            "El sistema decide por identidad, con una única pregunta.",
+            "El teléfono se pide solo a quien le falta.",
+          ],
+          alternatives: [
+            "Una rama por proveedor: frágil.",
+            "Fiarse del botón pulsado: deja colarse a usuarios nuevos.",
+          ],
+        },
         from: "En la v1 se entraba solo con email y contraseña. Al añadir 'entrar con Google o Apple' apareció un lío: la misma pantalla servía para dos cosas a la vez, iniciar sesión si ya tenías cuenta y registrarte si eras nuevo, y la app no distinguía bien quién era quién. El resultado eran usuarios nuevos que se saltaban el cuestionario inicial y entraban con la app vacía: sin datos, sin dashboard y con dietas recomendadas sin sentido, porque nunca habían dicho su objetivo, su peso o su altura. Encima había una trampa: la app daba por hecho el cuestionario a cualquiera que tuviera guardado aunque fuera un solo dato, aunque no hubiera respondido nada, y así mucha gente quedaba marcada como 'ya lo hizo' sin haberlo hecho.",
         decided: [
           "Hay dos puertas de entrada, 'Empezar ahora' y 'Log in', pero las dos llevan a la misma pantalla de acceso (Google, Apple o email). En lugar de tratar cada proveedor por separado, dejamos que el sistema decida por identidad: si la persona ya tiene cuenta, la reconoce y le hace login; si no, le hace una sola pregunta, '¿ya tienes cuenta con nosotros?'. Sin ramas distintas para Google o Apple, un único camino claro.",

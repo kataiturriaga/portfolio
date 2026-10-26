@@ -223,22 +223,30 @@ export const articles = featuredProcesses.map((process) => ({
 }));
 
 export const copy = {
-  header: {
-    name: "Kata",
-    big: "iturriaga",
-    condition: "Portfolio",
-    metrics: [
-      { label: "Años", value: "3,8" },
-      { label: "Ideas", value: "4,7K" },
-    ],
+  /** Columna fija de la home: Kata es la "ubicación actual" */
+  profile: {
+    over: "Mi ubicación · Barcelona",
+    name: "Kata Iturriaga",
+    big: "4+",
+    unit: "años",
+    role: "Product Designer",
+    availability: "Disponible para nuevos proyectos",
+    location: "Barcelona · remoto · CET",
+    reach: { value: "12 proyectos", note: "18 marcas · 8M+ personas" },
+    primaryCta: "Escríbeme",
+    secondaryCta: "Ver casos",
   },
+  featured: { label: "Caso destacado", cta: "Leer el caso" },
+  testimonialTitle: "Lo que cuentan",
+  processesTitle: "El laboratorio · Procesos",
   intro:
     "Diseño productos digitales desde la primera pregunta hasta el último detalle, conectando investigación, estrategia, interfaz y código.",
   trajectory: { title: "Trayectoria" },
   work: {
     title: "Previsión a 6 proyectos",
+    readCase: "Leer caso",
     intro: "Una selección de productos lanzados y conceptos de los últimos años.",
-    archive: "Explorar el archivo completo",
+    archive: "Ver el archivo",
     next: "En el próximo parte",
     nextItems: [
       "Un sistema de conocimiento para productos con IA",
@@ -284,14 +292,14 @@ export const copy = {
   articles: { title: "Detrás de cada proyecto · Procesos" },
   contact: {
     title: "Hablemos",
-    intro: "Proyectos, equipos, colaboraciones o un café por videollamada. Escríbeme.",
+    intro: "Proyectos, equipos o un café por videollamada.",
     reads: "Leo todos los mensajes.",
     emailLabel: "Correo",
     email: "hola@tudominio.com",
-    emailHint: "Haz clic para copiar",
+    emailHint: "Copiar email",
     copied: "Copiado ✓",
     scheduleLabel: "Agenda",
-    schedule: "Reserva 30 minutos",
+    schedule: "Reservar 30 min",
     availability: "Abierto a nuevos proyectos",
     updatedAt: "Actualizado a las",
   },

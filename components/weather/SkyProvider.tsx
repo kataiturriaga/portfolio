@@ -6,9 +6,10 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
-import { DayMoment, SkyCondition } from "@/data/weather";
+import { DayMoment, SkyCondition, widgetTones } from "@/data/weather";
 
 type SkyValue = { moment: DayMoment; condition: SkyCondition };
 
@@ -45,20 +46,36 @@ export default function SkyProvider({ children }: { children: React.ReactNode })
     });
   }, []);
 
-  const update = useCallback((next: SkyValue) => {
-    setSky(next);
+  // Los widgets leen sus tonos de dos variables CSS que siguen al cielo activo.
+  useEffect(() => {
+    const tones = widgetTones(sky.moment, sky.condition);
+    const root = document.documentElement.style;
+    root.setProperty("--tone-a", tones.a);
+    root.setProperty("--tone-b", tones.b);
+  }, [sky.moment, sky.condition]);
+
+  // Persistir en un efecto, no dentro del setState: así cada cambio parte del
+  // estado más reciente y dos clics seguidos no se pisan.
+  const touched = useRef(false);
+  useEffect(() => {
+    if (!touched.current) return;
     try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(sky));
     } catch {
       /* sin persistencia */
     }
+  }, [sky]);
+
+  const update = useCallback((patch: Partial<SkyValue>) => {
+    touched.current = true;
+    setSky((prev) => ({ ...prev, ...patch }));
   }, []);
 
   const value = useMemo<SkyState>(
     () => ({
       ...sky,
-      setMoment: (m: DayMoment) => update({ ...sky, moment: m }),
-      setCondition: (c: SkyCondition) => update({ ...sky, condition: c }),
+      setMoment: (moment: DayMoment) => update({ moment }),
+      setCondition: (condition: SkyCondition) => update({ condition }),
     }),
     [sky, update],
   );

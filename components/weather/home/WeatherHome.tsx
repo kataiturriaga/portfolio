@@ -1,112 +1,117 @@
 import Link from "next/link";
-import CityHeader from "../CityHeader";
-import GlassCard from "../GlassCard";
 import WeatherIcon from "../WeatherIcon";
+import Widget from "../Widget";
+import FeaturedCase from "./FeaturedCase";
+import ProjectForecast from "./ProjectForecast";
 import TrajectoryStrip from "./TrajectoryStrip";
-import ForecastList from "./ForecastList";
 import ContactCard from "./ContactCard";
-import { copy, industries, projects, timeline, articles } from "@/data/home";
+import LocalTime from "./LocalTime";
+import { copy, projects, timeline, articles } from "@/data/home";
+import { casos } from "@/data/casos";
+import { processes } from "@/data/processes";
+import { processStatusWeather } from "@/data/weather";
 
 export default function WeatherHome() {
+  const p = copy.profile;
+  const featured = casos[0];
+
   return (
-    <main className="weather-shell">
-      <CityHeader
-        name={copy.header.name}
-        big={copy.header.big}
-        condition={copy.header.condition}
-        hiLo={copy.header.metrics.map((metric) => (
-          <span key={metric.label}>
-            {metric.label} {metric.value}
-          </span>
-        ))}
-      />
+    <main className="home">
+      <aside className="home-profile">
+        <p className="home-profile__over">{p.over}</p>
+        <h1 className="home-profile__name">{p.name}</h1>
+        <p className="home-profile__big">
+          {p.big}
+          <sup>{p.unit}</sup>
+        </p>
+        <p className="home-profile__role">{p.role}</p>
+        <p className="home-profile__intro">{copy.intro}</p>
+        <p className="home-profile__status">
+          <i aria-hidden="true" />
+          {p.availability}
+        </p>
+        <div className="home-profile__ctas">
+          <a href="#contacto" className="pill pill--solid">
+            {p.primaryCta}
+          </a>
+          <Link href="/casos" className="pill">
+            {p.secondaryCta}
+          </Link>
+        </div>
+        <dl className="home-profile__stats">
+          <div>
+            <dt>
+              <LocalTime />
+            </dt>
+            <dd>{p.location}</dd>
+          </div>
+          <div>
+            <dt>{p.reach.value}</dt>
+            <dd>{p.reach.note}</dd>
+          </div>
+        </dl>
+        <nav className="home-profile__nav" aria-label="Secciones">
+          <Link href="/casos">
+            Casos <span>{projects.length} ›</span>
+          </Link>
+          <Link href="/procesos">
+            Procesos <span>{processes.length} ›</span>
+          </Link>
+          <a href="#contacto">
+            Contacto <span>›</span>
+          </a>
+        </nav>
+      </aside>
 
-      <div className="card-stack">
-        <GlassCard icon="calendario" title={copy.trajectory.title} className="span-2">
-          <TrajectoryStrip items={timeline} />
-        </GlassCard>
+      <div className="home-board">
+        {featured ? (
+          <FeaturedCase caso={featured} label={copy.featured.label} cta={copy.featured.cta} />
+        ) : null}
 
-        <GlassCard icon="calendario" title={copy.work.title} className="span-2">
-          <ForecastList items={projects} />
-          <p className="card-archive-link">
-            <Link href="/casos">{copy.work.archive} →</Link>
-          </p>
-        </GlassCard>
+        <Widget
+          tone="b"
+          icon="nube-sol"
+          title={copy.work.title}
+          action={<Link href="/casos">{copy.work.archive} ›</Link>}
+        >
+          <ProjectForecast items={projects} readCase={copy.work.readCase} />
+        </Widget>
 
-        <GlassCard icon="brujula" title={copy.smallCards.sectors}>
-          {industries.map((industry) => (
-            <div key={industry.number} className="forecast-row forecast-row--compact">
-              <span className="forecast-row__client">{industry.title}</span>
-              <span className="forecast-row__year">{industry.clients}</span>
-            </div>
-          ))}
-        </GlassCard>
-
-        <div className="small-grid">
-          <GlassCard icon="ojo" title={copy.smallCards.reach}>
-            <p className="small-card__value">{copy.smallCards.reachValue}</p>
-            <p className="small-card__note">{copy.smallCards.reachNote}</p>
-          </GlassCard>
-          <GlassCard icon="sol" title={copy.smallCards.brands}>
-            <p className="small-card__value">{copy.smallCards.brandsValue}</p>
-            <p className="small-card__note">{copy.smallCards.brandsNote}</p>
-          </GlassCard>
-          <GlassCard icon="campana" title={copy.smallCards.availability} className="small-card--ok">
-            <p className="small-card__value">{copy.smallCards.availabilityValue}</p>
-            <p className="small-card__note">{copy.smallCards.availabilityNote}</p>
-          </GlassCard>
-          <GlassCard icon="ubicacion" title={copy.smallCards.location}>
-            <p className="small-card__value">{copy.smallCards.locationValue}</p>
-            <p className="small-card__note">{copy.smallCards.locationNote}</p>
-          </GlassCard>
+        <div className="home-pair">
+          <Widget tone="a" icon="amanecer" title={copy.trajectory.title}>
+            <TrajectoryStrip items={timeline} />
+          </Widget>
+          <Widget tone="b" icon="campana" title={copy.testimonialTitle}>
+            <blockquote className="quote">
+              <p>“{copy.testimonial.quote}”</p>
+              <footer>
+                {copy.testimonial.person} · {copy.testimonial.role}
+              </footer>
+            </blockquote>
+          </Widget>
         </div>
 
-        <GlassCard icon="mapa" title={copy.smallCards.lab}>
-          <p className="small-card__value">{copy.smallCards.labValue}</p>
-          <p className="small-card__note">{copy.smallCards.labNote}</p>
-          <p className="card-archive-link">
-            <Link href="/procesos">Entrar →</Link>
-          </p>
-        </GlassCard>
-
-        <GlassCard icon="sol" title={copy.about.title} className="span-2">
-          <div className="card-prose">
-            <p className="card-lead">{copy.about.lead}</p>
-            <p>{copy.about.firstParagraph}</p>
-            <p>{copy.about.secondParagraph}</p>
-            <p>
-              <strong>{copy.about.signature}</strong> · {copy.about.signatureRole}
-            </p>
-          </div>
-        </GlassCard>
-
-        <GlassCard
-          icon="campana"
-          title={copy.testimonial.title}
-          className="glass-card--alert span-2"
-        >
-          <div className="card-prose">
-            <p className="card-lead">“{copy.testimonial.quote}”</p>
-            <p>
-              <strong>{copy.testimonial.person}</strong> · {copy.testimonial.role}
-            </p>
-          </div>
-        </GlassCard>
-
-        <GlassCard icon="lista" title={copy.articles.title} className="span-2">
-          {articles.map((article) => (
-            <Link key={article.number} href={article.href} className="forecast-row">
-              <span className="forecast-row__client">{article.category}</span>
-              <WeatherIcon name="nube-sol" size={20} />
-              <span className="forecast-row__title">{article.title}</span>
-              <span className="forecast-row__year">{article.date}</span>
-            </Link>
-          ))}
-        </GlassCard>
-
-        <GlassCard icon="sobre" title={copy.contact.title} className="span-2">
-          <ContactCard />
-        </GlassCard>
+        <div className="home-pair">
+          <Widget tone="b" icon="mapa" title={copy.processesTitle}>
+            <ul className="widget-links">
+              {articles.map((article) => (
+                <li key={article.number}>
+                  <Link href={article.href}>
+                    <WeatherIcon
+                      name={processStatusWeather[article.date]?.icon ?? "nube-sol"}
+                      size={18}
+                    />
+                    <span>{article.title}</span>
+                    <span aria-hidden="true">›</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </Widget>
+          <Widget tone="positive" icon="sobre" title={copy.contact.title} id="contacto">
+            <ContactCard />
+          </Widget>
+        </div>
       </div>
     </main>
   );
